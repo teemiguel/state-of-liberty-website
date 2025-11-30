@@ -782,79 +782,77 @@ window.addEventListener('scroll', function() {
     }
 });
 </script>
-<!-- FLOATING SIDE NAVIGATION MENU – ELITE -->
-<nav id="floatingNav" style="position:fixed; left:30px; top:50%; transform:translateY(-50%); z-index:9998; 
-     display:flex; flex-direction:column; gap:16px; opacity:0; visibility:hidden; transition:all 0.6s ease;">
-  
-  <a href="#home"      class="nav-dot" data-tooltip="Home">•</a>
-  <a href="#about"     class="nav-dot" data-tooltip="About">•</a>
-  <a href="#divisions" class="nav-dot" data-tooltip="Divisions">•</a>
-  <a href="#freeform"  class="nav-dot" data-tooltip="Freeform">•</a>
-  <a href="#gallery"   class="nav-dot" data-tooltip="Gallery">•</a>
-  <a href="#media"     class="nav-dot" data-tooltip="Podcast & Blog">•</a>
-  <a href="#liftasmile"class="nav-dot" data-tooltip="LiftASmile">•</a>
-  <a href="#news"      class="nav-dot" data-tooltip="News" style="background:#ff1e56; transform:scale(1.2);">•</a>
-  <a href="#contact"   class="nav-dot" data-tooltip="Contact">•</a>
-</nav>
+<!-- FLOATING SOCIAL ICONS – RIGHT SIDE -->
+<div id="floatingSocial" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:9997; 
+     display:flex; flex-direction:column; gap:18px; opacity:0; visibility:hidden; transition:all 0.6s ease;">
+
+  <a href="https://instagram.com/stateofliberty" target="_blank" class="social-icon" data-label="Instagram">Instagram</a>
+  <a href="https://tiktok.com/@stateofliberty" target="_blank" class="social-icon" data-label="TikTok">TikTok</a>
+  <a href="https://youtube.com/@stateofliberty" target="_blank" class="social-icon" data-label="YouTube">YouTube</a>
+  <a href="https://x.com/stateofliberty" target="_blank" class="social-icon" data-label="X">X</a>
+  <a href="https://stateofliberty.co.za/news" target="_blank" class="social-icon" style="background:#ff1e56;" data-label="News">News</a>
+
+</div>
 
 <style>
-  .nav-dot {
-    width:14px; height:14px; background:#333; border-radius:50%; 
-    display:block; transition:all 0.4s; position:relative;
-    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+  .social-icon {
+    width:48px; height:48px; background:#000; color:white; 
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:22px; text-decoration:none; box-shadow:0 8px 25px rgba(0,0,0,0.5);
+    transition:all 0.4s; position:relative;
   }
-  .nav-dot:hover {
-    background:#ff1e56; transform:scale(1.5); box-shadow:0 0 20px rgba(255,30,86,0.6);
+  .social-icon:hover {
+    background:#ff1e56; transform:scale(1.2) translateX(-10px);
+    box-shadow:0 0 30px rgba(255,30,86,0.7);
   }
-  .nav-dot::after {
-    content:attr(data-tooltip);
-    position:absolute; left:30px; top:50%; transform:translateY(-50%);
-    background:#000; color:white; padding:8px 14px; border-radius:8px; font-size:14px; white-space:nowrap;
-    opacity:0; visibility:hidden; transition:all 0.3s; pointer-events:none;
-    box-shadow:0 4px 15px rgba(0,0,0,0.5);
+  .social-icon::after {
+    content:attr(data-label);
+    position:absolute; right:70px; top:50%; transform:translateY(-50%);
+    background:#000; color:white; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:bold;
+    white-space:nowrap; opacity:0; visibility:hidden; transition:all 0.3s;
   }
-  .nav-dot:hover::after {
-    opacity:1; visibility:visible; left:40px;
-  }
-  /* Active section highlight */
-  .nav-dot.active {
-    background:#ff1e56; transform:scale(1.6); box-shadow:0 0 20px rgba(255,30,86,0.8);
+  .social-icon:hover::after {
+    opacity:1; visibility:visible; right:80px;
   }
 </style>
 
 <script>
-// Show floating nav after scrolling past hero
-// Highlight active section
-const sections = document.querySelectorAll('section[id]');
-const navDots = document.querySelectorAll('#floatingNav a');
-
+// Show floating social after scrolling a bit
 window.addEventListener('scroll', () => {
-  const floatingNav = document.getElementById('floatingNav');
-  
-  // Show when past hero
-  if (window.scrollY > window.innerHeight * 0.5) {
-    floatingNav.style.opacity = '1';
-    floatingNav.style.visibility = 'visible';
+  const social = document.getElementById('floatingSocial');
+  if (window.scrollY > 300) {
+    social.style.opacity = '1';
+    social.style.visibility = 'visible';
   } else {
-    floatingNav.style.opacity = '0';
-    floatingNav.style.visibility = 'hidden';
+    social.style.opacity = '0';
+    social.style.visibility = 'hidden';
   }
-
-  // Highlight current section
-  let current = '';
-  sections.forEach(section => {
-    if (window.scrollY >= section.offsetTop - 200) {
-      current = section.getAttribute('id');
-    }
-  });
-
-  navDots.forEach(dot => {
-    dot.classList.remove('active');
-    if (dot.getAttribute('href') === `#${current}`) {
-      dot.classList.add('active');
-    }
-  });
 });
 </script>
+<!-- FLOATING WHATSAPP CHAT – ALWAYS VISIBLE -->
+<a href="https://wa.me/27613224702?text=Hey%20State%20of%20Liberty!%20I%20saw%20your%20site%20" 
+   target="_blank"
+   id="whatsappFloat"
+   style="position:fixed; bottom:110px; right:24px; z-index:9999; 
+          width:68px; height:68px; background:#25D366; color:white; 
+          border-radius:50%; display:flex; align-items:center; justify-content:center;
+          font-size:36px; box-shadow:0 10px 30px rgba(37,211,102,0.5);
+          animation: pulse 2s infinite; transition:all 0.3s;">
+  <svg viewBox="0 0 24 24" width="38" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898 1.865 1.867 2.889 4.348 2.887 6.987-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+  </svg>
+</a>
+
+<style>
+@keyframes pulse {
+  0%   { box-shadow:0 0 0 0 rgba(37,211,102,0.7); }
+  70%  { box-shadow:0 0 0 12px rgba(37,211,102,0); }
+  100% { box-shadow:0 0 0 0 rgba(37,211,102,0); }
+}
+#whatsappFloat:hover {
+  transform:scale(1.1);
+  animation:none;
+}
+</style>
 </body>
 </html>
