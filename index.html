@@ -3,556 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State of Liberty | Talent Agency</title>
-    <meta name="description" content="Africa's boldest talent agency representing models, actors, musicians, creatives & performers. Freedom. Authenticity. Opportunity.">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>State of Liberty | Africa's Boldest Talent Agency</title>
+    <meta name="description" content="Empowering models, actors, musicians & creatives across Africa. Freedom. Authenticity. Excellence.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #0a0a0a;
-            --secondary: #ff1e56;
-            --accent: #f5f5f5;
-            --text: #ffffff;
-            --light: #f8f8f8;
-        }
+        :root { --primary:#0a0a0a; --secondary:#ff1e56; --text:#fff; }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Inter', sans-serif; background:#000; color:#fff; line-height:1.6; overflow-x:hidden; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        a { text-decoration:none; color:inherit; }
+        body { font-family:'Inter',sans-serif; background:#000; color:#fff; line-height:1.6; overflow-x:hidden; }
+        h1,h2,h3 { font-family:'Playfair Display',serif; }
         .container { max-width:1400px; margin:0 auto; padding:0 20px; }
-
-        /* Header */
-        header {
-            position:fixed; top:0; left:0; width:100%; z-index:1000;
-            background:rgba(0,0,0,0.9); backdrop-filter:blur(10px);
-        }
-        .nav-flex { display:flex; justify-content:space-between; align-items:center; padding:20px 0; position:relative; }
-        .logo { font-size:28px; font-weight:700; letter-spacing:1px; z-index:1001; }
-        .logo span { color:var(--secondary); }
-
-        /* Desktop Menu */
-        .nav-links {
-            display:flex; gap:40px;
-        }
-        .nav-links a {
-            font-weight:500; transition:0.3s; position:relative;
-        }
-        .nav-links a::after {
-            content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px;
-            background:var(--secondary); transition:0.3s;
-        }
-        .nav-links a:hover::after { width:100%; }
-
-        /* Hamburger */
-        .hamburger {
-            display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:1001;
-        }
-        .hamburger span {
-            width:30px; height:3px; background:#fff; transition:0.3s;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hamburger { display:flex; }
-            .nav-links {
-                position:fixed; top:0; right:-100%; height:100vh; width:80%; max-width:320px;
-                background:rgba(10,10,10,0.98); backdrop-filter:blur(10px);
-                flex-direction:column; align-items:center; justify-content:center;
-                gap:40px; transition:right 0.4s ease; z-index:1000; padding:100px 20px 40px;
-            }
-            .nav-links.active { right:0; }
-            .nav-links a { font-size:1.5rem; font-weight:600; }
-        }
-
-        /* Hamburger → X */
-        .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(8px,8px); }
-        .hamburger.active span:nth-child(2) { opacity:0; }
-        .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(7px,-7px); }
-
-        /* Overlay */
-        body.menu-open::before {
-            content:''; position:fixed; top:0; left:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.8); z-index:999; opacity:0; pointer-events:none; transition:opacity 0.4s;
-        }
-        body.menu-open::before { opacity:1; pointer-events:all; }
-
-        /* Hero */
-        .hero {
-            height:100vh; min-height:800px;
-            background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-                        url('images/hero.jpg') center/cover no-repeat;
-            display:flex; align-items:center; text-align:center;
-        }
-        .hero-content { max-width:900px; margin:0 auto; }
-        .hero h1 { font-size:5.5rem; margin-bottom:20px; line-height:1.1; }
-        .hero p { font-size:1.4rem; margin-bottom:40px; opacity:0.9; }
+        a { text-decoration:none; color:inherit; }
         .btn { display:inline-block; padding:16px 40px; border-radius:50px; font-weight:600; transition:0.4s; margin:10px; }
-        .btn-primary { background:var(--secondary); color:#fff; }
-        .btn-outline { border:2px solid #fff; color:#fff; }
+        .btn-primary { background:var(--secondary); color:#000; }
+        .btn-outline { border:2px solid #fff; }
         .btn:hover { transform:translateY(-5px); }
 
-        section { padding:120px 0; }
-        .section-title { font-size:3.5rem; text-align:center; margin-bottom:80px; }
-        .section-title span { color:var(--secondary); }
+        header { position:fixed; top:0; left:0; width:100%; z-index:1000; background:rgba(0,0,0,0.9); backdrop-filter:blur(10px); }
+        .nav-flex { display:flex; justify-content:space-between; align-items:center; padding:20px 0; }
+        .logo { font-size:28px; font-weight:700; }
+        .logo span { color:var(--secondary); }
+        .nav-links { display:flex; gap:40px; }
+        .nav-links a { font-weight:500; position:relative; }
+        .nav-links a::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--secondary); transition:0.3s; }
+        .nav-links a:hover::after { width:100%; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+        .hamburger span { width:30px; height:3px; background:#fff; transition:0.3s; }
 
-        .divisions-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px; }
-        .division-card { background:rgba(255,255,255,0.05); border-radius:20px; overflow:hidden; transition:0.4s; }
-        .division-card:hover { transform:translateY(-20px); box-shadow:0 20px 40px rgba(255,30,90,0.2); }
-        .division-card h3 { padding:30px 30px 10px; font-size:1.8rem; }
-        .division-card p { padding:0 30px 30px; opacity:0.8; }
+        @media (max-width:768px) {
+            .hamburger { display:flex; }
+            .nav-links { position:fixed; top:0; right:-100%; height:100vh; width:80%; max-width:320px; background:rgba(10,10,10,0.98); flex-direction:column; align-items:center; justify-content:center; gap:40px; transition:0.4s; z-index:1000; padding:100px 20px 40px; }
+            .nav-links.active { right:0; }
+            .nav-links a { font-size:1.5rem; }
+            .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(8px,8px); }
+            .hamburger.active span:nth-child(2) { opacity:0; }
+            .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(7px,-7px); }
+        }
+        body.menu-open::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:999; opacity:0; pointer-events:none; transition:0.4s; }
+        body.menu-open::before { opacity:1; pointer-events:all; }
 
-        .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; }
-        .gallery-item { position:relative; overflow:hidden; border-radius:15px; height:400px; }
-        .gallery-item img { width:100%; height:100%; object-fit:cover; transition:0.6s; }
-        .gallery-item:hover img { transform:scale(1.15); }
+        .hero { height:100vh; min-height:700px; background:linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1534528744355-853c5d8f97b6?auto=format&fit=crop&q=80') center/cover no-repeat; display:flex; align-items:center; text-align:center; }
+        .hero h1 { font-size:5.5rem; margin-bottom:20px; }
+        .hero p { font-size:1.5rem; max-width:900px; margin:0 auto 40px; opacity:0.9; }
 
-        footer { background:#111; padding:80px 0 40px; }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:50px; margin-bottom:60px; }
-        .footer-col h3 { margin-bottom:30px; font-size:1.5rem; }
-        .footer-col ul { list-style:none; }
-        .footer-col ul li { margin-bottom:15px; opacity:0.8; }
-        .social-links { display:flex; gap:20px; font-size:1.5rem; margin-top:30px; }
+        footer { background:#111; padding:80px 20px 40px; }
+        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:50px; margin-bottom:60px; }
+        .social-links { display:flex; gap:20px; font-size:1.8rem; margin-top:20px; }
         .copyright { text-align:center; padding-top:40px; border-top:1px solid rgba(255,255,255,0.1); opacity:0.6; }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size:3.5rem; }
-        }
+        @media (max-width:768px) { .hero h1 { font-size:3.5rem; } }
     </style>
 </head>
 <body>
 
-    <!-- Header with Mobile Menu -->
-    <header>
-        <div class="container">
-            <nav class="nav-flex">
-                <div class="logo">State of <span>Liberty</span></div>
-                <div class="nav-links" id="navLinks">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#divisions">Divisions</a>
-                    <a href="#talent">Join</a>
-                    <a href="#bookings">Book Talent</a>
-                    <a href="#gallery">Gallery</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- HOME -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Where Talent Meets Freedom</h1>
-                <p>Empowering artists, models, creatives, and performers to rise boldly, authentically, and without limits.</p>
-                <div>
-                    <a href="#talent" class="btn btn-primary">Join the Agency</a>
-                    <a href="#bookings" class="btn btn-outline">Book Talent</a>
-                </div>
+<header>
+    <div class="container">
+        <nav class="nav-flex">
+            <div class="logo"><a href="index.html">State of <span>Liberty</span></a></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="divisions.html">Divisions</a>
+                <a href="talent.html">Join</a>
+                <a href="bookings.html">Book Talent</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
             </div>
-        </div>
-    </section>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </nav>
+    </div>
+</header>
 
-    <section class="container" style="text-align:center; padding:100px 0;">
-        <h2 style="font-size:3rem; margin-bottom:30px;">State of Liberty is a talent agency built for today’s creative generation.</h2>
-        <p style="font-size:1.3rem; opacity:0.9; max-width:900px; margin:0 auto;">
-            We represent bold voices, unique styles, authentic expression, and powerful individuality.
+<section class="hero">
+    <div class="container">
+        <h1>Where Talent Meets Freedom</h1>
+        <p>Empowering Africa’s boldest models, actors, musicians, creatives & performers to rise authentically.</p>
+        <div>
+            <a href="talent.html" class="btn btn-primary">Join the Agency</a>
+            <a href="bookings.html" class="btn btn-outline">Book Talent</a>
+        </div>
+    </div>
+</section>
+
+<section style="padding:120px 20px; text-align:center; background:#0f0f0f;">
+    <div class="container">
+        <h2 style="font-size:3rem; margin-bottom:40px;">Africa’s Boldest Creative Talent Agency</h2>
+        <p style="font-size:1.3rem; max-width:900px; margin:0 auto 60px; opacity:0.9;">
+            We represent authentic voices across modelling, acting, music, events & creative arts — giving talent the freedom to be themselves.
         </p>
-    </section>
-
-    <section id="divisions" style="background:#0f0f0f;">
-        <div class="container">
-            <h2 class="section-title">Our <span>Divisions</span></h2>
-            <div class="divisions-grid">
-                <div class="division-card">
-                    <h3>Modelling & Fashion</h3>
-                    <p>Runway | Print | Commercial | Editorial<br>We represent models who break norms, set trends, and express style with purpose.</p>
-                </div>
-                <div class="division-card">
-                    <h3>Acting & Film</h3>
-                    <p>Film | TV | Online Series | Casting Support<br>Our actors bring stories to life through their skill, personality, and dedication.</p>
-                </div>
-                <div class="division-card">
-                    <h3>Music & Performing Arts</h3>
-                    <p>Vocalists | Dancers | Musicians | Performers<br>For artists who move audiences with rhythm, presence, and creative power.</p>
-                </div>
-                <div class="division-card">
-                    <h3>Creative Arts & Media</h3>
-                    <p>Photographers | Makeup Artists | Designers | Content Creators<br>Behind-the-scenes visionaries who turn ideas into reality.</p>
-                </div>
-                <div class="division-card">
-                    <h3>Events, Promotions & Brand Ambassadors</h3>
-                    <p>Promoters | Hosts | Event Talent | Influencers<br>Personality-driven talent for brands, festivals, launches, and activation events.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container" style="text-align:center;">
-        <h2 class="section-title">Why State of <span>Liberty</span></h2>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:40px; max-width:1100px; margin:0 auto;">
-            <div><h3>Checkmark We champion authentic talent</h3></div>
-            <div><h3>Checkmark We create real opportunities</h3></div>
-            <div><h3>Checkmark We connect creatives with brands, studios, and events</h3></div>
-            <div><h3>Checkmark We empower every voice to shine</h3></div>
-        </div>
-        <div style="margin-top:80px;">
-            <h2>Ready to shine?<br>Become part of the State of Liberty movement.</h2>
-            <div style="margin-top:40px;">
-                <a href="#talent" class="btn btn-primary">Apply as Talent</a>
-                <a href="#bookings" class="btn btn-outline">Book Talent</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" style="background:#0f0f0f;">
-        <div class="container">
-            <h2 class="section-title">Who <span>We Are</span></h2>
-            <div style="max-width:900px; margin:0 auto; text-align:center; font-size:1.3rem; line-height:1.8;">
-                <p style="margin-bottom:40px;">State of Liberty is a modern talent agency founded on one core belief: <strong>creativity thrives where there is freedom.</strong></p>
-                <p style="margin-bottom:60px;">We represent diverse talent across modelling, acting, music, performing arts, and creative industries — giving them a platform to grow, evolve, and be fully themselves.</p>
-                <h3 style="font-size:2.5rem; margin:60px 0 30px;">Our Mission</h3>
-                <p>To empower talent with the freedom, opportunities, and support they need to grow boldly and authentically in the creative industry.</p>
-                <h3 style="font-size:2.5rem; margin:60px 0 30px;">Our Vision</h3>
-                <p>To become Africa’s leading creative hub where individuality is celebrated and talent is transformed into global excellence.</p>
-                <h3 style="font-size:2.5rem; margin:60px 0 40px;">Our Values</h3>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:30px; text-align:left;">
-                    <div><strong>Authenticity</strong> – Be real. Be you.</div>
-                    <div><strong>Creativity</strong> – Innovation in every expression.</div>
-                    <div><strong>Professionalism</strong> – Excellence in every interaction.</div>
-                    <div><strong>Freedom</strong> – No limits. No stereotypes.</div>
-                    <div><strong>Opportunity</strong> – Creating real pathways for success.</div>
-                </div>
-                <h3 style="font-size:2.5rem; margin:80px 0 40px;">What Makes Us Different</h3>
-                <div style="text-align:left; max-width:800px; margin:0 auto; font-size:1.1rem;">
-                    <p>Checkmark We focus on individual expression, not stereotypes</p>
-                    <p>Checkmark We provide career development, not just bookings</p>
-                    <p>Checkmark We connect talent with verified brands & events</p>
-                    <p>Checkmark We support new and rising creatives, not just professionals</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TALENT -->
-    <section id="talent">
-        <div class="container">
-            <h2 class="section-title">Become Part of the <span>Movement</span></h2>
-            <div style="max-width:900px; margin:0 auto; text-align:center;">
-                <p style="font-size:1.4rem; margin-bottom:60px;">Whether you’re a model, actor, singer, performer, or creative — your talent deserves a platform.</p>
-                <h3 style="font-size:2.2rem; margin-bottom:40px;">Why Join State of Liberty</h3>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:40px; margin-bottom:80px;">
-                    <div>Checkmark Access real casting calls & opportunities</div>
-                    <div>Checkmark Work with verified brands and agencies</div>
-                    <div>Checkmark Be part of a supportive creative community</div>
-                    <div>Checkmark Training, guidance, and portfolio growth</div>
-                    <div>Checkmark Your identity and individuality are celebrated</div>
-                </div>
-                <h3 style="font-size:2rem; margin-bottom:40px;">Talent Requirements</h3>
-                <p style="margin-bottom:60px; font-size:1.2rem;">We accept talent from all backgrounds, shapes, ages, and styles.<br><strong>What matters most: confidence, creativity, and passion.</strong></p>
-                <h3 style="font-size:2rem; margin-bottom:40px;">How to Apply</h3>
-                <ol style="text-align:left; max-width:600px; margin:0 auto 80px; font-size:1.1rem; line-height:2;">
-                    <li>Fill in the online application</li>
-                    <li>Upload photos (natural photos accepted)</li>
-                    <li>State your division(s) of interest</li>
-                    <li>Submit and wait for our team to contact you</li>
-                </ol>
-                <div style="background:rgba(255,30,90,0.1); padding:40px; border-radius:20px; margin:60px 0;">
-                    <h3>Frequently Asked Questions</h3>
-                    <p><strong>Do I need experience?</strong> → No.<br><strong>Do I pay to join?</strong> → Never pay upfront — we only earn when you earn.<br><strong>How long does approval take?</strong> → 48–72 hours.</p>
-                </div>
-                <a href="#contact" class="btn btn-primary" style="font-size:1.3rem; padding:20px 60px;">Apply Now</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- BOOKINGS -->
-    <section id="bookings" style="background:#0f0f0f;">
-        <div class="container">
-            <h2 class="section-title">Book <span>Talent</span></h2>
-            <div style="max-width:900px; margin:0 auto; text-align:center;">
-                <p style="font-size:1.3rem; margin-bottom:60px;">From models and actors to creators, performers, and promoters — we provide professional talent for brands, productions, and events.</p>
-                <h3 style="margin-bottom:40px;">Who We Work With</h3>
-                <p style="margin-bottom:80px;">Clothing brands • Photographers • Advertising agencies • Film & TV productions • Event organizers • Music video directors • Corporate clients</p>
-                <h3 style="margin-bottom:40px;">Booking Process</h3>
-                <ol style="text-align:left; max-width:700px; margin:0 auto 80px; line-height:2.2;">
-                    <li>Submit your project details</li>
-                    <li>Tell us the type of talent you need</li>
-                    <li>Our team matches you with the right profiles</li>
-                    <li>Approve the lineup</li>
-                    <li>Confirm the booking</li>
-                </ol>
-                <!-- BOOKING REQUEST FORM – PROFESSIONAL & BEAUTIFUL -->
-<section style="background:#000; padding:120px 0;">
-    <div class="container">
-        <h2 class="section-title">Book <span>Talent</span> for Your Project</h2>
-
-        <!-- Success Message -->
-        <div id="booking-success" style="display:none; background:#ff1e56; color:#000; padding:30px; border-radius:16px; margin-bottom:40px; font-weight:700; text-align:center; font-size:1.3rem;">
-            Booking request received! We’ll send you talent options within 24 hours.
-        </div>
-
-        <form id="booking-form" action="https://formspree.io/f/YOUR_BOOKING_ENDPOINT" method="POST" enctype="multipart/form-data">
-            <div style="max-width:900px; margin:0 auto; display:grid; gap:26px; text-align:left;">
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                    <div>
-                        <label>Full Name / Company *</label>
-                        <input type="text" name="name" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; font-size:1rem;">
-                    </div>
-                    <div>
-                        <label>Email *</label>
-                        <input type="email" name="email" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                    </div>
-                </div>
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                    <div>
-                        <label>Phone / WhatsApp *</label>
-                        <input type="tel" name="phone" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                    </div>
-                    <div>
-                        <label>Company / Brand (if applicable)</label>
-                        <input type="text" name="company" style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                    </div>
-                </div>
-
-                <div>
-                    <label>Project Type *</label>
-                    <select name="project_type" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; font-size:1rem;">
-                        <option value="">Select one...</option>
-                        <option>Photoshoot / Campaign</option>
-                        <option>Fashion Show / Runway</option>
-                        <option>Film / TV / Music Video</option>
-                        <option>Brand Activation / Event</option>
-                        <option>Commercial / Advertising</option>
-                        <option>Social Media Content</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                    <div>
-                        <label>Date(s) Needed *</label>
-                        <input type="date" name="date" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                    </div>
-                    <div>
-                        <label>Location *</label>
-                        <input type="text" name="location" required placeholder="e.g. Cape Town, Johannesburg, Studio..." style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                    </div>
-                </div>
-
-                <div>
-                    <label>Talent Needed (check all that apply) *</label>
-                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; margin-top:12px; background:rgba(255,255,255,0.03); padding:20px; border-radius:12px;">
-                        <label><input type="checkbox" name="talent" value="Models"> Models</label>
-                        <label><input type="checkbox" name="talent" value="Actors"> Actors</label>
-                        <label><input type="checkbox" name="talent" value="Dancers/Performers"> Dancers / Performers</label>
-                        <label><input type="checkbox" name="talent" value="Musicians"> Musicians</label>
-                        <label><input type="checkbox" name="talent" value="Photographers/MUA"> Photographers / MUA</label>
-                        <label><input type="checkbox" name="talent" value="Promoters/Hosts"> Promoters / Hosts</label>
-                    </div>
-                </div>
-
-                <div>
-                    <label>Budget Range (optional but helpful)</label>
-                    <select name="budget" style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
-                        <option value="">Prefer not to say</option>
-                        <option>R5,000 – R20,000</option>
-                        <option>R20,000 – R50,000</option>
-                        <option>R50,000 – R100,000</option>
-                        <option>R100,000+</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Project Details / Brief *</label>
-                    <textarea name="brief" rows="6" required placeholder="Tell us about the project, look, vibe, duration..." style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; resize:vertical;"></textarea>
-                </div>
-
-                <div>
-                    <label>Upload Moodboard / Brief / References (optional)</label>
-                    <input type="file" name="attachments" accept=".pdf,.jpg,.jpeg,.png,.zip" multiple style="width:100%; padding:16px; background:#111; border:2px dashed #ff1e56; border-radius:12px; color:#fff;">
-                    <small style="opacity:0.8;">PDF, images, or ZIP – max 25MB total</small>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width:100%; padding:22px; font-size:1.5rem; border-radius:16px; margin-top:20px;">
-                    Send Booking Request
-                </button>
-            </div>
-        </form>
+        <a href="talent.html" class="btn btn-primary">Apply Now</a>
+        <a href="about.html" class="btn btn-outline">Learn More</a>
     </div>
 </section>
 
-<!-- Success Handler Script -->
-<script>
-    const bookingForm = document.getElementById('booking-form');
-    const bookingSuccess = document.getElementById('booking-success');
-
-    if (window.location.search.includes('success')) {
-        bookingForm.style.display = 'none';
-        bookingSuccess.style.display = 'block';
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
-</script>
-            </div>
-        </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery">
-        <div class="container">
-            <h2 class="section-title">Talent <span>Gallery</span></h2>
-            <p style="text-align:center; max-width:900px; margin:0 auto 80px; font-size:1.2rem;">
-                A curated showcase of our models, actors, creatives, and performers — capturing the spirit, style, and identity of State of Liberty.
-            </p>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534528744355-853c5d8f97b6?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580518324671-cef17a0f595b?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1594744803329-e58b31de8e72?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80" alt="Talent"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80" alt="Talent"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WORKING CONTACT / APPLICATION FORM -->
-<section id="contact" style="background:#0f0f0f;">
+<footer>
     <div class="container">
-        <h2 class="section-title">Let’s <span>Connect</span></h2>
-        <div style="max-width:700px; margin:0 auto; text-align:center;">
-
-            <!-- SUCCESS MESSAGE (hidden by default) -->
-            <div id="form-success" style="display:none; background:#ff1e56; color:#000; padding:20px; border-radius:12px; margin-bottom:30px; font-weight:600;">
-                Thank you! Your message has been sent. We’ll reply within 24 hours.
-            </div>
-
-            <!-- THE ACTUAL FORM -->
-            <form id="contact-form" action="https://formspree.io/f/xwkgbvdq" method="POST">
-                <div style="display:grid; gap:20px; text-align:left;">
-                    <div>
-                        <label for="name">Full Name *</label>
-                        <input type="text" name="name" id="name" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
-                    </div>
-
-                    <div>
-                        <label for="email">Email Address *</label>
-                        <input type="email" name="email" id="email" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
-                    </div>
-
-                    <div>
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" name="phone" id="phone" style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
-                    </div>
-
-                    <div>
-                        <label for="type">I'm contacting about *</label>
-                        <select name="type" id="type" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
-                            <option value="">Select one...</option>
-                            <option value="Talent Application">I want to join as talent</option>
-                            <option value="Booking Request">I want to book talent</option>
-                            <option value="Brand Collaboration">Brand / partnership</option>
-                            <option value="General Inquiry">Other inquiry</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="message">Message / Tell us more *</label>
-                        <textarea name="message" id="message" rows="6" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem; resize:vertical;"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width:100%; padding:18px; font-size:1.2rem; margin-top:10px;">
-                        Send Message
-                    </button>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>State of <span style="color:#ff1e56;">Liberty</span></h3>
+                <p style="margin-top:20px; opacity:0.8;">Freedom. Authenticity. Excellence.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
                 </div>
-            </form>
+            </div>
         </div>
+        <div class="copyright">© 2025 State of Liberty. All rights reserved.</div>
     </div>
-</section>
+</footer>
 
-<!-- Formspree Success Handling -->
 <script>
-    const form = document.getElementById('contact-form');
-    const success = document.getElementById('form-success');
-
-    form.addEventListener('submit', function(e) {
-        // Optional: show loading state
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
     });
-
-    // Formspree redirects back with ?success=1
-    if (window.location.search.includes('success')) {
-        form.style.display = 'none';
-        success.style.display = 'block';
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
+        hamburger.classList.remove('active'); navLinks.classList.remove('active'); body.classList.remove('menu-open');
+    }));
 </script>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>State of <span style="color:var(--secondary);">Liberty</span></h3>
-                    <p style="margin-top:20px; opacity:0.8;">Africa's leading creative talent agency. Freedom. Authenticity. Excellence.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#divisions">Divisions</a></li>
-                        <li><a href="#talent">Join as Talent</a></li>
-                        <li><a href="#bookings">Book Talent</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                © 2025 State of Liberty. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Mobile Menu Script -->
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        const body = document.body;
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
-    </script>
 </body>
 </html>

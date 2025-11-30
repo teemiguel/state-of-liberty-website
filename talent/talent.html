@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply as Talent | State of Liberty</title>
+<!-- Same <style> block -->
+</head><body>
+<!-- Same header -->
+
+<!-- <!-- MOBILE-OPTIMIZED TALENT APPLICATION FORM -->
+<section style="background:#0f0f0f; padding:100px 20px;">
+    <div class="container">
+        <h2 class="section-title" style="font-size:2.5rem;">Apply as <span>Talent</span></h2>
+
+        <div id="apply-success" style="display:none; background:#ff1e56; color:#000; padding:20px; border-radius:12px; margin:30px auto; text-align:center; font-weight:700; max-width:600px;">
+            Application received! We’ll reply within 48 hours.
+        </div>
+
+        <form id="talent-form" action="https://formspree.io/f/YOUR_TALENT_ENDPOINT" method="POST" enctype="multipart/form-data" style="max-width:700px; margin:0 auto;">
+            <div style="display:flex; flex-direction:column; gap:20px;">
+
+                <!-- Image Preview -->
+                <div id="image-preview" style="display:none; margin-bottom:20px;">
+                    <p style="text-align:center; opacity:0.9; margin-bottom:12px;">Your photos:</p>
+                    <div id="preview-container" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:10px;"></div>
+                </div>
+
+                <!-- Name -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <input type="text" name="first_name" placeholder="First Name *" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff; font-size:1.1rem;">
+                    <input type="text" name="last_name" placeholder="Last Name *" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff; font-size:1.1rem;">
+                </div>
+
+                <input type="email" name="email" placeholder="Email *" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff; font-size:1.1rem;">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp *" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff; font-size:1.1rem;">
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <input type="number" name="age" placeholder="Age *" min="13" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff;">
+                    <input type="text" name="location" placeholder="City (e.g. Cape Town) *" required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff;">
+                </div>
+
+                <!-- Divisions -->
+                <div style="background:rgba(255,255,255,0.04); padding:20px; border-radius:12px;">
+                    <p style="margin-bottom:12px; font-weight:600;">Divisions (select all)</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:0.95rem;">
+                        <label><input type="checkbox" name="divisions" value="Modelling & Fashion"> Modelling</label>
+                        <label><input type="checkbox" name="divisions" value="Acting & Film"> Acting</label>
+                        <label><input type="checkbox" name="divisions" value="Music & Performing Arts"> Music/Performing</label>
+                        <label><input type="checkbox" name="divisions" value="Creative Arts & Media"> Creative/Media</label>
+                        <label><input type="checkbox" name="divisions" value="Events & Brand Ambassadors"> Events/Promo</label>
+                    </div>
+                </div>
+
+                <div>
+                    <input type="file" name="photos" id="photo-upload" accept="image/*" multiple required style="padding:18px; background:#222; border:2px dashed #ff1e56; border-radius:12px; width:100%; color:#fff; font-size:1rem;">
+                    <small style="opacity:0.7; display:block; margin-top:8px;">Up to 8 photos (natural shots welcome)</small>
+                </div>
+
+                <input type="url" name="portfolio" placeholder="Instagram / Portfolio link (optional)" style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff;">
+                <textarea name="bio" rows="5" placeholder="Tell us about yourself, experience, passions..." required style="padding:18px; background:#222; border:none; border-radius:12px; color:#fff; resize:none; font-size:1.1rem;"></textarea>
+
+                <button type="submit" class="btn btn-primary" style="padding:20px; font-size:1.3rem; border-radius:16px;">Submit Application</button>
+            </div>
+        </form>
+    </div>
+</section> -->
+
+<!-- Same footer + script -->
+</body></html>
