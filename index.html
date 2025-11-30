@@ -782,53 +782,6 @@ window.addEventListener('scroll', function() {
     }
 });
 </script>
-<!-- FLOATING SOCIAL ICONS – RIGHT SIDE -->
-<div id="floatingSocial" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:9997; 
-     display:flex; flex-direction:column; gap:18px; opacity:0; visibility:hidden; transition:all 0.6s ease;">
-
-  <a href="https://instagram.com/stateofliberty" target="_blank" class="social-icon" data-label="Instagram">Instagram</a>
-  <a href="https://tiktok.com/@stateofliberty" target="_blank" class="social-icon" data-label="TikTok">TikTok</a>
-  <a href="https://youtube.com/@stateofliberty" target="_blank" class="social-icon" data-label="YouTube">YouTube</a>
-  <a href="https://x.com/stateofliberty" target="_blank" class="social-icon" data-label="X">X</a>
-  <a href="https://stateofliberty.co.za/news" target="_blank" class="social-icon" style="background:#ff1e56;" data-label="News">News</a>
-
-</div>
-
-<style>
-  .social-icon {
-    width:48px; height:48px; background:#000; color:white; 
-    border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-size:22px; text-decoration:none; box-shadow:0 8px 25px rgba(0,0,0,0.5);
-    transition:all 0.4s; position:relative;
-  }
-  .social-icon:hover {
-    background:#ff1e56; transform:scale(1.2) translateX(-10px);
-    box-shadow:0 0 30px rgba(255,30,86,0.7);
-  }
-  .social-icon::after {
-    content:attr(data-label);
-    position:absolute; right:70px; top:50%; transform:translateY(-50%);
-    background:#000; color:white; padding:8px 16px; border-radius:8px; font-size:13px; font-weight:bold;
-    white-space:nowrap; opacity:0; visibility:hidden; transition:all 0.3s;
-  }
-  .social-icon:hover::after {
-    opacity:1; visibility:visible; right:80px;
-  }
-</style>
-
-<script>
-// Show floating social after scrolling a bit
-window.addEventListener('scroll', () => {
-  const social = document.getElementById('floatingSocial');
-  if (window.scrollY > 300) {
-    social.style.opacity = '1';
-    social.style.visibility = 'visible';
-  } else {
-    social.style.opacity = '0';
-    social.style.visibility = 'hidden';
-  }
-});
-</script>
 <!-- FLOATING WHATSAPP CHAT – ALWAYS VISIBLE -->
 <a href="https://wa.me/27613224702?text=Hey%20State%20of%20Liberty!%20I%20saw%20your%20site%20" 
    target="_blank"
