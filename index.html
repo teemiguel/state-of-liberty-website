@@ -157,6 +157,7 @@
                 <a href="#talent">Join</a>
                 <a href="#bookings">Book Talent</a>
                 <a href="#gallery">Gallery</a>
+                <a href="/news" style="color:#ff1e56; font-weight:700;">News</a>
                 <a href="#contact">Contact</a>
             </div>
 
@@ -727,5 +728,27 @@
             });
         });
     </script>
+    <!-- NEWSLETTER SIGNUP – MAIN AGENCY SITE -->
+<section style="background:#111; padding:100px 20px; text-align:center;">
+    <div class="container">
+        <h2 style="font-size:3.5rem; margin-bottom:20px;">
+            Stay Free. <span style="color:#ff1e56;">Stay Updated.</span>
+        </h2>
+        <p style="font-size:1.3rem; max-width:700px; margin:0 auto 40px; opacity:0.9;">
+            Exclusive talent drops, Freeform launches, podcast episodes & behind-the-scenes.
+        </p>
+
+        <!-- ConvertKit Form (or use Mailchimp/Beehiiv – just replace action URL) -->
+        <form action="https://app.convertkit.com/forms/1234567/subscriptions" method="post" 
+              style="max-width:600px; margin:0 auto; display:grid; gap:16px; grid-template-columns:1fr auto;">
+            <input type="email" name="email_address" placeholder="Your email" required
+                   style="padding:18px; border-radius:12px; border:none; font-size:1.1rem; background:#222; color:#fff;">
+            <button type="submit" class="btn btn-primary" style="padding:18px 40px; font-size:1.2rem;">
+                Subscribe
+            </button>
+        </form>
+        <p style="margin-top:20px; font-size:0.9rem; opacity:0.7;">Zero spam. Unsubscribe anytime.</p>
+    </div>
+</section>
 </body>
 </html>
