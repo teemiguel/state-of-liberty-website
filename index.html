@@ -118,6 +118,49 @@
             .hero h1 { font-size:3.5rem; }
         }
     </style>
+    <style>
+/* MOBILE PERFECTION — HIDES/RESIZES FLOATING ELEMENTS ON PHONE */
+@media (max-width: 768px) {
+    /* Hide side navigation completely on mobile (too crowded) */
+    #floatingNav {
+        display: none !important;
+    }
+
+    /* Shrink & reposition social icons */
+    #floatingSocial {
+        right: 12px !important;
+        gap: 14px !important;
+    }
+    .social-icon {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 19px !important;
+    }
+
+    /* Shrink WhatsApp button */
+    #whatsappFloat {
+        width: 58px !important;
+        height: 58px !important;
+        bottom: 90px !important;
+        right: 16px !important;
+    }
+    #whatsappFloat svg { width: 34px !important; }
+
+    /* Shrink back-to-top button */
+    #backToTop {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 20px !important;
+        right: px !important;
+    }
+    #backToTop svg { width: 56px !important; height: 56px !important; }
+
+    /* Optional: hide social icons completely on very small screens */
+    @media (max-width: 480px) {
+        #floatingSocial { display: none; }
+    }
+}
+</style>
 </head>
 <body>
 
