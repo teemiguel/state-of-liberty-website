@@ -80,7 +80,7 @@
         .hero {
             height:100vh; min-height:800px;
             background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-                        url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&q=90') center/cover no-repeat;
+                        url('images/hero.jpg') center/cover no-repeat;
             display:flex; align-items:center; text-align:center;
         }
         .hero-content { max-width:900px; margin:0 auto; }
@@ -313,25 +313,76 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" style="background:#0f0f0f;">
-        <div class="container">
-            <h2 class="section-title">Let’s <span>Connect</span></h2>
-            <div style="max-width:900px; margin:0 auto; text-align:center;">
-                <p style="margin-bottom:60px;">We are here to respond to applications, bookings, and brand collaborations.</p>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:50px; margin-bottom:80px;">
-                    <div><h3>Email</h3><p style="font-size:1.4rem;">info@stateofliberty.co.za</p></div>
-                    <div><h3>Phone</h3><p style="font-size:1.4rem;">+27 60 556 7890</p></div>
-                    <div><h3>Location</h3><p style="font-size:1.2rem;">Cape Town & Johannesburg<br>South Africa</p></div>
-                </div>
-                <div style="margin-top:80px;">
-                    <a href="#talent" class="btn btn-outline">Apply as Talent</a>
-                    <a href="#bookings" class="btn btn-outline">Book Talent</a>
-                    <a href="#gallery" class="btn btn-outline">Visit Gallery</a>
-                </div>
+    <!-- WORKING CONTACT / APPLICATION FORM -->
+<section id="contact" style="background:#0f0f0f;">
+    <div class="container">
+        <h2 class="section-title">Let’s <span>Connect</span></h2>
+        <div style="max-width:700px; margin:0 auto; text-align:center;">
+
+            <!-- SUCCESS MESSAGE (hidden by default) -->
+            <div id="form-success" style="display:none; background:#ff1e56; color:#000; padding:20px; border-radius:12px; margin-bottom:30px; font-weight:600;">
+                Thank you! Your message has been sent. We’ll reply within 24 hours.
             </div>
+
+            <!-- THE ACTUAL FORM -->
+            <form id="contact-form" action="https://formspree.io/f/xwkgbvdq" method="POST">
+                <div style="display:grid; gap:20px; text-align:left;">
+                    <div>
+                        <label for="name">Full Name *</label>
+                        <input type="text" name="name" id="name" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
+                    </div>
+
+                    <div>
+                        <label for="email">Email Address *</label>
+                        <input type="email" name="email" id="email" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
+                    </div>
+
+                    <div>
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" name="phone" id="phone" style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
+                    </div>
+
+                    <div>
+                        <label for="type">I'm contacting about *</label>
+                        <select name="type" id="type" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem;">
+                            <option value="">Select one...</option>
+                            <option value="Talent Application">I want to join as talent</option>
+                            <option value="Booking Request">I want to book talent</option>
+                            <option value="Brand Collaboration">Brand / partnership</option>
+                            <option value="General Inquiry">Other inquiry</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message">Message / Tell us more *</label>
+                        <textarea name="message" id="message" rows="6" required style="width:100%; padding:14px; background:#222; border:none; border-radius:8px; color:#fff; font-size:1rem; resize:vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width:100%; padding:18px; font-size:1.2rem; margin-top:10px;">
+                        Send Message
+                    </button>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Formspree Success Handling -->
+<script>
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+
+    form.addEventListener('submit', function(e) {
+        // Optional: show loading state
+    });
+
+    // Formspree redirects back with ?success=1
+    if (window.location.search.includes('success')) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+</script>
 
     <!-- Footer -->
     <footer>
