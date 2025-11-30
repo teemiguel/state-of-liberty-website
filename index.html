@@ -289,6 +289,119 @@
                     <li>Confirm the booking</li>
                 </ol>
                 <a href="#contact" class="btn btn-primary">Submit Booking Request</a>
+                <!-- BOOKING REQUEST FORM – PROFESSIONAL & BEAUTIFUL -->
+<section style="background:#000; padding:120px 0;">
+    <div class="container">
+        <h2 class="section-title">Book <span>Talent</span> for Your Project</h2>
+
+        <!-- Success Message -->
+        <div id="booking-success" style="display:none; background:#ff1e56; color:#000; padding:30px; border-radius:16px; margin-bottom:40px; font-weight:700; text-align:center; font-size:1.3rem;">
+            Booking request received! We’ll send you talent options within 24 hours.
+        </div>
+
+        <form id="booking-form" action="https://formspree.io/f/YOUR_BOOKING_ENDPOINT" method="POST" enctype="multipart/form-data">
+            <div style="max-width:900px; margin:0 auto; display:grid; gap:26px; text-align:left;">
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                    <div>
+                        <label>Full Name / Company *</label>
+                        <input type="text" name="name" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; font-size:1rem;">
+                    </div>
+                    <div>
+                        <label>Email *</label>
+                        <input type="email" name="email" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                    <div>
+                        <label>Phone / WhatsApp *</label>
+                        <input type="tel" name="phone" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                    </div>
+                    <div>
+                        <label>Company / Brand (if applicable)</label>
+                        <input type="text" name="company" style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                    </div>
+                </div>
+
+                <div>
+                    <label>Project Type *</label>
+                    <select name="project_type" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; font-size:1rem;">
+                        <option value="">Select one...</option>
+                        <option>Photoshoot / Campaign</option>
+                        <option>Fashion Show / Runway</option>
+                        <option>Film / TV / Music Video</option>
+                        <option>Brand Activation / Event</option>
+                        <option>Commercial / Advertising</option>
+                        <option>Social Media Content</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                    <div>
+                        <label>Date(s) Needed *</label>
+                        <input type="date" name="date" required style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                    </div>
+                    <div>
+                        <label>Location *</label>
+                        <input type="text" name="location" required placeholder="e.g. Cape Town, Johannesburg, Studio..." style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                    </div>
+                </div>
+
+                <div>
+                    <label>Talent Needed (check all that apply) *</label>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; margin-top:12px; background:rgba(255,255,255,0.03); padding:20px; border-radius:12px;">
+                        <label><input type="checkbox" name="talent" value="Models"> Models</label>
+                        <label><input type="checkbox" name="talent" value="Actors"> Actors</label>
+                        <label><input type="checkbox" name="talent" value="Dancers/Performers"> Dancers / Performers</label>
+                        <label><input type="checkbox" name="talent" value="Musicians"> Musicians</label>
+                        <label><input type="checkbox" name="talent" value="Photographers/MUA"> Photographers / MUA</label>
+                        <label><input type="checkbox" name="talent" value="Promoters/Hosts"> Promoters / Hosts</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Budget Range (optional but helpful)</label>
+                    <select name="budget" style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff;">
+                        <option value="">Prefer not to say</option>
+                        <option>R5,000 – R20,000</option>
+                        <option>R20,000 – R50,000</option>
+                        <option>R50,000 – R100,000</option>
+                        <option>R100,000+</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Project Details / Brief *</label>
+                    <textarea name="brief" rows="6" required placeholder="Tell us about the project, look, vibe, duration..." style="width:100%; padding:16px; background:#111; border:none; border-radius:12px; color:#fff; resize:vertical;"></textarea>
+                </div>
+
+                <div>
+                    <label>Upload Moodboard / Brief / References (optional)</label>
+                    <input type="file" name="attachments" accept=".pdf,.jpg,.jpeg,.png,.zip" multiple style="width:100%; padding:16px; background:#111; border:2px dashed #ff1e56; border-radius:12px; color:#fff;">
+                    <small style="opacity:0.8;">PDF, images, or ZIP – max 25MB total</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; padding:22px; font-size:1.5rem; border-radius:16px; margin-top:20px;">
+                    Send Booking Request
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Success Handler Script -->
+<script>
+    const bookingForm = document.getElementById('booking-form');
+    const bookingSuccess = document.getElementById('booking-success');
+
+    if (window.location.search.includes('success')) {
+        bookingForm.style.display = 'none';
+        bookingSuccess.style.display = 'block';
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+</script>
             </div>
         </div>
     </section>
