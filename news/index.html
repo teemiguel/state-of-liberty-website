@@ -6,42 +6,46 @@
   <title>Chasing Liberty • News</title>
   <meta name="description" content="Independent South African & African news – updated daily">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body{background:#000;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
-    h2{font-family:'Orbitron',sans-serif;letter-spacing:1px}
+    h2{font-family:'Orbitron',sans-serif}
     .container{max-width:1400px;margin:0 auto;padding:0 20px}
-    .division-card{background:rgba(255,255,255,0.05);border-radius:20px;padding:40px;text-align:center;transition:0.4s;border:2px solid transparent;}
-    .division-card:hover{border-color:#ff1e56;transform:translateY(-12px);box-shadow:0 25px 50px rgba(255,30,86,0.35);}
-    .article-title{font-size:2.2rem;margin-bottom:20px;color:#ff1e56;}
-    .article-source{opacity:0.9;font-size:1rem;}
-    header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);padding:20px 0;}
+    .division-card{background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:0.4s;border:2px solid transparent;position:relative;}
+    .division-card:hover{border-color:#ff1e56;transform:translateY(-12px);box-shadow:0 30px 60px rgba(255,30,86,0.4);}
+    .card-image{width:100%;height:200px;object-fit:cover;}
+    .card-content{padding:30px;text-align:center;}
+    .article-title{font-size:2rem;margin-bottom:12px;color:#ff1e56;font-weight:700;}
+    .article-source{opacity:0.8;font-size:0.95rem;margin-bottom:8px;}
+    header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);padding:20px 0;border-bottom:1px solid rgba(255,30,86,0.2);}
     .header-content{display:flex;justify-content:space-between;align-items:center;}
-    .logo{font-size:32px;font-weight:900;}
-    .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;}
+    .logo{font-size:36px;font-weight:900;}
+    .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
+    .back-btn:hover{background:#ff3366;}
   </style>
 </head>
 <body>
-  <!-- SAME HEADER AS MAIN SITE -->
+
   <header>
     <div class="container header-content">
       <div class="logo">Chasing <span style="color:#ff1e56;">Liberty</span></div>
       <a href="/" class="back-btn">Back to Agency</a>
     </div>
   </header>
-  <section style="padding:160px 20px 100px;">
+
+  <section style="padding:160px 20px 120px;">
     <div class="container">
-      <h2 class="section-title" style="font-size:4rem;text-align:center;margin-bottom:80px;">
+      <h2 style="font-size:4.5rem;text-align:center;margin-bottom:80px;">
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
-      <!-- ARTICLES GRID – EXACT SAME STYLE AS DIVISIONS -->
-      <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;">
-        <div style="grid-column:1/-1;text-align:center;padding:60px;font-size:2rem;opacity:0.6;">
-          Loading fresh headlines...
+
+      <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;">
+        <div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">
+          Loading today's headlines...
         </div>
       </div>
     </div>
   </section>
+
   <script>
     const FEEDS = [
       'https://www.news24.com/rss',
@@ -51,45 +55,58 @@
       'https://mybroadband.co.za/news/feed/',
       'https://www.businesslive.co.za/rss'
     ];
+
     async function loadNews() {
       const grid = document.getElementById('newsGrid');
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
+
       let allArticles = [];
       for (const url of FEEDS) {
         try {
           const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
           const data = await res.json();
           if (data.status === 'ok') {
-            data.items.slice(0, 4).forEach(item => {
+            data.items.slice(0, 5).forEach(item => {
+              const img = item.enclosure?.link || 
+                         item.thumbnail || 
+                         (item.description.match(/src=["'](.*?)["']/)?.[1]) || 
+                         'https://via.placeholder.com/600x400/111/333?text=News';
               allArticles.push({
                 title: item.title,
                 link: item.link,
-                snippet: item.description.replace(/<[^>]*>/g, '').substring(0, 120) + '...',
-                source: new URL(item.link).hostname.replace('www.', '').split('.')[0]
+                image: img,
+                snippet: item.description.replace(/<[^>]*>/g, '').substring(0, 130) + '...',
+                source: new URL(item.link).hostname.replace('www.', '').split('.')[0].charAt(0).toUpperCase() + new URL(item.link).hostname.replace('www.', '').split('.')[0].slice(1)
               });
             });
           }
         } catch (e) {}
       }
-      allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      allArticles.sort(() => Math.random() - 0.5); // shuffle for variety
       grid.innerHTML = '';
+
       allArticles.slice(0, 15).forEach(article => {
         const card = document.createElement('a');
         card.href = article.link;
         card.target = '_blank';
-        card.style = 'text-decoration:none;color:inherit;';
+        card.style = 'text-decoration:none;color:inherit;display:block;';
         card.innerHTML = `
           <div class="division-card">
-            <h3 class="article-title">${article.title}</h3>
-            <p class="article-source">${article.source}</p>
-            <p style="opacity:0.9;margin-top:15px;">${article.snippet}</p>
+            <img src="${article.image}" alt="${article.title}" class="card-image" onerror="this.src='https://via.placeholder.com/600x400/111/333?text=No+Image'">
+            <div class="card-content">
+              <h3 class="article-title">${article.title}</h3>
+              <p class="article-source">${article.source}</p>
+              <p style="opacity:0.9;margin-top:12px;line-height:1.5;">${article.snippet}</p>
+            </div>
           </div>
         `;
         grid.appendChild(card);
       });
     }
+
     loadNews();
-    setInterval(loadNews, 6*60*60*1000);
+    setInterval(loadNews, 6*60*60*1000); // refresh every 6 hours
   </script>
 </body>
 </html>
