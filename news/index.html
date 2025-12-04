@@ -1,78 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chasing Liberty • News</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .logo-svg { width: 280px; height: auto; }
-    @media (max-width: 768px) { .logo-svg { width: 220px; } }
-  </style>
+  <style>body{font-family:'Inter',sans-serif;background:#0f172a;color:white;}</style>
 </head>
-<body class="min-h-screen bg-gray-50 text-gray-900">
+<body class="min-h-screen">
 
-  <!-- LOGO SVG -->
-  <svg class="logo-svg mx-auto mt-8" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ff1e56"/><stop offset="1" stop-color="#ff1e56"/></linearGradient></defs>
-    <rect width="800" height="200" rx="20" fill="white"/>
-    <text x="40" y="120" font-family="Inter, Arial" font-size="70" font-weight="700" fill="url(#g)">Chasing</text>
-    <text x="360" y="120" font-family="Inter, Arial" font-size="70" font-weight="300" fill="#000">Liberty</text>
-    <circle cx="740" cy="60" r="28" fill="#dfe6e9"/>
-    <path d="M732 52 L748 68 M748 52 L732 68" stroke="#ff1e56" stroke-width="4" stroke-linecap="round"/>
-  </svg>
-
-  <header class="bg-white shadow">
-    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-gray-600 text-center md:text-left">Independent • Verified • African Voices</p>
-      <nav class="flex gap-8 text-lg font-medium">
-        <a href="/news" class="hover:text-red-600">Home</a>
-        <a href="#" class="hover:text-red-600">Local</a>
-        <a href="#" class="hover:text-red-600">Politics</a>
-        <a href="#" class="hover:text-red-600">Culture</a>
-        <a href="#" class="hover:text-red-600">Opinion</a>
-      </nav>
-      <a href="/" class="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800">Back to Agency</a>
+  <!-- HEADER -->
+  <header class="bg-black/90 backdrop-blur sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div>
+        <h1 class="text-4xl font-black text-red-600">Chasing Liberty</h1>
+        <p class="text-sm opacity-80">Independent • Verified • African Voices</p>
+      </div>
+      <a href="/" class="px-6 py-3 bg-red-600 rounded-full hover:bg-red-700 transition">Back to Agency</a>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 py-12">
-    <h1 class="text-5xl font-bold text-center mb-12">Latest Stories</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Repeat this card for each article -->
-      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80" class="w-full h-48 object-cover" />
-        <div class="p-6">
-          <span class="text-red-600 text-sm font-bold">Local</span>
-          <h2 class="text-xl font-bold mt-2">City Council Approves New Affordable Housing Plan</h2>
-          <p class="text-gray-600 mt-3">The city council voted unanimously on Friday to approve a five-year affordable housing initiative...</p>
-          <a href="#" class="mt-4 inline-block text-red-600 font-bold hover:underline">Read →</a>
-        </div>
-      </article>
-      <!-- Add more article cards here (copy-paste) -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h2 class="text-5xl font-bold text-center mb-4">Latest Stories</h2>
+    <p class="text-xl text-center opacity-80 mb-12">Fresh South African & African news — updated daily</p>
+
+    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="col-span-full text-center py-20 text-2xl opacity-60">Loading today's headlines...</div>
     </div>
   </main>
 
-  <footer class="bg-black text-white py-16 mt-20">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-thin mb-6">Chasing Liberty Daily</h3>
-        <p class="text-lg opacity-80 mb-8">Top stories, culture & politics — delivered every morning.</p>
-        
-        <form action="https://app.convertkit.com/forms/1234567/subscriptions" method="post" 
-              class="max-w-md mx-auto flex gap-3 mb-12">
-            <input type="email" name="email_address" placeholder="you@email.com" required
-                   class="flex-1 px-5 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400">
-            <button type="submit" class="px-8 py-4 bg-red-600 rounded-full font-bold hover:bg-red-700 transition">
-                Subscribe
-            </button>
-        </form>
-
-        <p class="text-3xl font-thin">Chasing Liberty</p>
-        <p class="mt-4 opacity-70">© 2025 • Part of State of Liberty Media</p>
-        <p class="mt-8">
-            <a href="/" class="underline hover:opacity-70">Back to Agency</a>
-        </p>
-    </div>
-</footer>
+  <script>
+    async function loadNews() {
+      const grid = document.getElementById('newsGrid');
+      try {
+        const res = await fetch('/latest-news.json?t=' + Date.now());
+        const articles = await res.json();
+        grid.innerHTML = '';
+        articles.forEach(a => {
+          const card = document.createElement('article');
+          card.className = 'bg-white/10 backdrop-blur rounded-2xl p-8 hover:bg-white/20 transition';
+          card.innerHTML = `
+            <h3 class="text-2xl font-bold mb-3">${a.title}</h3>
+            <p class="text-sm opacity-70 mb-4">${a.source} • ${new Date(a.date).toLocaleDateString('en-ZA')}</p>
+            <p class="mb-6 leading-relaxed">${a.snippet}</p>
+            <a href="${a.link}" target="_blank" class="inline-block px-6 py-3 bg-red-600 rounded-full hover:bg-red-700 transition font-bold">Read Full Story</a>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        grid.innerHTML = '<div class="col-span-full text-center text-red-400">Failed to load news. Retrying soon...</div>';
+      }
+    }
+    loadNews();
+    // Auto-refresh every 12 hours
+    setInterval(loadNews, 12 * 60 * 60 * 1000);
+  </script>
 </body>
 </html>
