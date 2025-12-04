@@ -22,7 +22,6 @@
   </style>
 </head>
 <body>
-
   <!-- SAME HEADER AS MAIN SITE -->
   <header>
     <div class="container header-content">
@@ -30,13 +29,11 @@
       <a href="/" class="back-btn">Back to Agency</a>
     </div>
   </header>
-
   <section style="padding:160px 20px 100px;">
     <div class="container">
       <h2 class="section-title" style="font-size:4rem;text-align:center;margin-bottom:80px;">
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
-
       <!-- ARTICLES GRID – EXACT SAME STYLE AS DIVISIONS -->
       <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;">
         <div style="grid-column:1/-1;text-align:center;padding:60px;font-size:2rem;opacity:0.6;">
@@ -45,7 +42,6 @@
       </div>
     </div>
   </section>
-
   <script>
     const FEEDS = [
       'https://www.news24.com/rss',
@@ -55,11 +51,9 @@
       'https://mybroadband.co.za/news/feed/',
       'https://www.businesslive.co.za/rss'
     ];
-
     async function loadNews() {
       const grid = document.getElementById('newsGrid');
       grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
-
       let allArticles = [];
       for (const url of FEEDS) {
         try {
@@ -77,10 +71,8 @@
           }
         } catch (e) {}
       }
-
       allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
       grid.innerHTML = '';
-
       allArticles.slice(0, 15).forEach(article => {
         const card = document.createElement('a');
         card.href = article.link;
