@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chasing Liberty • News</title>
+  <meta name="description" content="Independent South African & African news – updated daily">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body{font-family:'Inter',sans-serif;background:#0f172a;color:white;}
-    .article-card{transition:all 0.3s;}
-    .article-card:hover{transform:translateY(-8px);background:rgba(255,255,255,0.08);}
+    body {font-family:'Inter',sans-serif;background:#0f172a;color:white;}
+    .article-card {transition:all 0.3s;}
+    .article-card:hover {transform:translateY(-8px);background:white/15;}
   </style>
 </head>
 <body class="min-h-screen">
 
-  <header class="bg-black/95 backdrop-blur sticky top-0 z-50 shadow-2xl">
+  <header class="bg-black/90 backdrop-blur sticky top-0 z-50 shadow-2xl">
     <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
       <div>
         <h1 class="text-5xl font-black text-red-600">Chasing Liberty</h1>
@@ -25,10 +26,10 @@
 
   <main class="max-w-7xl mx-auto px-6 py-16">
     <h2 class="text-6xl font-black text-center mb-6">Latest Stories</h2>
-    <p class="text-2xl text-center opacity-80 mb-16">Real-time South African & African news — updated daily</p>
+    <p class="text-2xl text-center opacity-80 mb-16">Fresh South African & African news — updated daily</p>
 
     <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <div class="col-span-full text-center py-32 text-3xl opacity-50">Loading today's headlines...</div>
+      <div class="col-span-full text-center py-24 text-3xl opacity-60">Loading today's headlines...</div>
     </div>
   </main>
 
@@ -39,26 +40,28 @@
         const res = await fetch('/api/refresh-news');
         const articles = await res.json();
         grid.innerHTML = '';
+
         articles.forEach(a => {
           const card = document.createElement('article');
-          card.className = 'article-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10';
+          card.className = 'article-card bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20';
           card.innerHTML = `
-            <div class="text-red-500 font-bold text-sm mb-3">${a.source}</div>
+            <div class="text-sm opacity-70 mb-3">${a.source}</div>
             <h3 class="text-2xl font-bold mb-4 leading-tight">${a.title}</h3>
-            <p class="text-lg opacity-80 mb-6 leading-relaxed">${a.snippet}</p>
+            <p class="opacity-80 mb-6 leading-relaxed">${a.snippet}</p>
             <div class="flex justify-between items-center">
               <span class="text-sm opacity-60">${new Date(a.date).toLocaleDateString('en-ZA')}</span>
-              <a href="${a.link}" target="_blank" class="inline-block px-7 py-4 bg-red-600 rounded-full hover:bg-red-700 transition font-bold">Read Full Story</a>
+              <a href="${a.link}" target="_blank" class="px-6 py-3 bg-red-600 rounded-full hover:bg-red-700 transition font-bold">Read Full Story</a>
             </div>
           `;
           grid.appendChild(card);
         });
       } catch (e) {
-        grid.innerHTML = '<div class="col-span-full text-center text-red-400 text-2xl">Connecting to sources... Retrying in 5s</div>';
-        setTimeout(loadNews, 5000);
+        grid.innerHTML = '<div class="col-span-full text-center text-red-400 text-2xl">Loading news... (retrying)</div>';
+        setTimeout(loadNews, 8000);
       }
     }
     loadNews();
+    setInterval(loadNews, 12 * 60 * 60 * 1000); // refresh every 12 hours
   </script>
 </body>
 </html>
