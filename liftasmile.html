@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiftASmile Foundation – Support Our Mission</title>
+    <meta name="description" content="Join LiftASmile in empowering underserved children through education, arts, and creative mentorship. Donate today to lift smiles across Africa.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a; /* Deep blue for trust */
+            --secondary-green: #10b981; /* Green for growth/hope */
+            --accent-gold: #f59e0b; /* Gold for impact */
+            --text-light: #f8fafc; /* Light gray for readability */
+            --bg-dark: #0f172a; /* Dark slate for depth */
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-light); background: var(--bg-dark); overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); position: fixed; width: 100%; z-index: 1000; padding: 1rem 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 2rem; font-weight: 700; color: var(--white); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-light); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .donate-btn { background: var(--secondary-green); color: var(--white); padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; transition: 0.3s; }
+        .donate-btn:hover { background: #059669; transform: translateY(-2px); }
+
+        @media (max-width: 768px) { .nav-links { display: none; } /* Add hamburger later if needed */ }
+
+        /* Hero Section */
+        .hero { height: 100vh; background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(16, 185, 129, 0.6)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&q=80') center/cover no-repeat; display: flex; align-items: center; text-align: center; color: var(--white); }
+        .hero-content { max-width: 800px; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.95; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; transition: 0.3s; }
+        .cta-primary { background: var(--secondary-green); color: var(--white); }
+        .cta-secondary { background: transparent; border: 2px solid var(--white); color: var(--white); }
+
+        /* Mission Section */
+        .mission { padding: 100px 0; background: var(--bg-dark); }
+        .mission-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .mission-text h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--white); }
+        .mission-text p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .mission-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
+
+        /* Impact Stats */
+        .stats { background: var(--primary-blue); padding: 80px 0; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; }
+        .stat { }
+        .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .stat-label { font-size: 1.2rem; opacity: 0.9; }
+
+        /* Programs Section */
+        .programs { padding: 100px 0; }
+        .programs h2 { text-align: center; font-size: 3rem; margin-bottom: 3rem; color: var(--white); }
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .program-card { background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 20px; text-align: center; transition: 0.3s; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .program-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255, 30, 86, 0.2); }
+        .program-card i { font-size: 3rem; color: var(--secondary-green); margin-bottom: 1rem; }
+        .program-card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .program-card p { opacity: 0.9; }
+
+        /* Donation Form */
+        .donation { background: var(--primary-blue); padding: 100px 0; text-align: center; }
+        .donation h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--white); }
+        .donation p { font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .donation-form { max-width: 500px; margin: 0 auto; background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 20px; }
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group select { width: 100%; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; background: rgba(255, 255, 255, 0.1); color: var(--white); font-size: 1rem; }
+        .form-group input::placeholder { color: rgba(255, 255, 255, 0.7); }
+        .donate-amounts { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .amount-btn { padding: 1rem; background: rgba(255, 255, 255, 0.1); border: 2px solid transparent; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .amount-btn:hover, .amount-btn.active { border-color: var(--secondary-green); background: var(--secondary-green); }
+        .donate-btn { width: 100%; padding: 1.2rem; background: var(--secondary-green); color: var(--white); border: none; border-radius: 50px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .donate-btn:hover { background: #059669; transform: translateY(-2px); }
+
+        /* Footer */
+        footer { background: var(--bg-dark); padding: 60px 0 20px; text-align: center; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { color: var(--white); margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { opacity: 0.8; margin-bottom: 0.5rem; display: block; }
+        .footer-section a:hover { color: var(--accent-gold); }
+        .copyright { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; opacity: 0.6; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .mission-content { grid-template-columns: 1fr; text-align: center; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .programs-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Lift<span style="color:var(--secondary-green);">ASmile</span></div>
+            <div class="nav-links">
+                <a href="#mission">Our Mission</a>
+                <a href="#programs">Programs</a>
+                <a href="#impact">Impact</a>
+                <a href="#donate">Donate</a>
+            </div>
+            <a href="#donate" class="donate-btn">Donate Now</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Lift Every Smile</h1>
+            <p>Empowering underserved children through education, arts, and creative mentorship. Because every child deserves the freedom to dream.</p>
+            <div class="cta-buttons">
+                <a href="#donate" class="cta-btn cta-primary">Donate Today</a>
+                <a href="#programs" class="cta-btn cta-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h2>Our Mission</h2>
+                    <p>LiftASmile provides children in underserved communities with access to quality education, creative arts programs, and mentorship opportunities. We believe creativity is a fundamental right and a powerful tool for social change.</p>
+                    <p>Founded in 2024, we've already impacted over 2,500 children across Cape Town and Johannesburg, fostering confidence, skills, and joy through hands-on workshops and community events.</p>
+                </div>
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1581091226826-7a9cc5ba919c?ixlib=rb-4.0.3&auto=format&fit=crop&q=80" alt="Children in arts workshop">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section id="impact" class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">2,500+</div>
+                    <div class="stat-label">Children Supported</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">87</div>
+                    <div class="stat-label">Programs Delivered</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Community Partners</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <h2>Our Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Creative Arts Workshops</h3>
+                    <p>Hands-on sessions in painting, music, and dance for children aged 6-14, building confidence and self-expression.</p>
+                </div>
+                <div class="program-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Education Mentorship</h3>
+                    <p>One-on-one tutoring and study groups to support academic success and inspire lifelong learning.</p>
+                </div>
+                <div class="program-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Events</h3>
+                    <p>Annual festivals and pop-up events celebrating children's talents and fostering community bonds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form -->
+    <section id="donate" class="donation">
+        <div class="container">
+            <h2>Make a Difference Today</h2>
+            <p>Your support changes lives. Every donation funds workshops, materials, and mentorship for children who need it most.</p>
+            <form class="donation-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Donation Amount</label>
+                    <div class="donate-amounts">
+                        <div class="amount-btn" onclick="setAmount(50)">R50</div>
+                        <div class="amount-btn" onclick="setAmount(100)">R100</div>
+                        <div class="amount-btn" onclick="setAmount(250)">R250</div>
+                        <div class="amount-btn" onclick="setAmount(500)">R500</div>
+                        <div class="amount-btn" onclick="setAmount(1000)">R1,000</div>
+                    </div>
+                    <input type="number" id="customAmount" placeholder="Other amount (R)" style="margin-top:1rem;">
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select required>
+                        <option value="">Select...</option>
+                        <option>Card</option>
+                        <option>PayFast</option>
+                        <option>Bank Transfer</option>
+                    </select>
+                </div>
+                <button type="submit" class="donate-btn">Donate Now</button>
+            </form>
+            <p style="margin-top:2rem; opacity:0.8; font-size:0.9rem;">Secure donations via PayFast. 100% goes to programs.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>LiftASmile</h3>
+                    <p>Empowering children through creativity and education.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#mission">Our Mission</a>
+                    <a href="#programs">Programs</a>
+                    <a href="#impact">Impact</a>
+                    <a href="#donate">Donate</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@liftasmile.org</p>
+                    <p>Phone: +27 61 322 4702</p>
+                    <p>Cape Town & Johannesburg</p>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 LiftASmile Foundation. Part of SOL Creatives. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function setAmount(amount) {
+            document.getElementById('customAmount').value = amount;
+            document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        // Form submission (placeholder)
+        document.querySelector('.donation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your support! Redirecting to secure payment...');
+            // Integrate with PayFast or Stripe here
+        });
+    </script>
+</body>
+</html>
