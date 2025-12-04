@@ -9,7 +9,6 @@
 </head>
 <body class="min-h-screen">
 
-  <!-- HEADER -->
   <header class="bg-black/90 backdrop-blur sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div>
@@ -33,7 +32,7 @@
     async function loadNews() {
       const grid = document.getElementById('newsGrid');
       try {
-        const res = await fetch('/latest-news.json?t=' + Date.now());
+        const res = await fetch('/api/refresh-news');
         const articles = await res.json();
         grid.innerHTML = '';
         articles.forEach(a => {
@@ -48,12 +47,11 @@
           grid.appendChild(card);
         });
       } catch (e) {
-        grid.innerHTML = '<div class="col-span-full text-center text-red-400">Failed to load news. Retrying soon...</div>';
+        grid.innerHTML = '<div class="col-span-full text-center text-red-400">Failed – retrying in 10s...</div>';
+        setTimeout(loadNews, 10000);
       }
     }
     loadNews();
-    // Auto-refresh every 12 hours
-    setInterval(loadNews, 12 * 60 * 60 * 1000);
   </script>
 </body>
 </html>
