@@ -1,36 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chasing Liberty • News</title>
-  <meta name="description" content="Independent South African & African news – updated daily">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>body{font-family:'Inter',sans-serif;background:#0f172a;color:white;}</style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chasing Liberty • News</title>
+<meta name="description" content="Independent South African & African news – updated daily">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#ff1e56;--black:#000000;--dark:#0a0a0a;--gray:#111;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+  h1,h2{font-family:'Orbitron',sans-serif;letter-spacing:1px}
+  .glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:16px}
+  .btn-red{background:var(--red);padding:16px 40px;border-radius:50px;font-weight:700;font-size:1.1rem;transition:0.3s}
+  .btn-red:hover{background:#ff3366;transform:scale(1.05)}
+</style>
 </head>
-<body class="min-h-screen">
+<body>
 
-  <header class="bg-black/90 backdrop-blur sticky top-0 z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+  <!-- HEADER – IDENTICAL TO MAIN SITE -->
+  <header class="fixed top-0 w-full z-50 glass border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
       <div>
-        <h1 class="text-4xl font-black text-red-600">Chasing Liberty</h1>
-        <p class="text-sm opacity-80">Independent • Verified • African Voices</p>
+        <h1 class="text-5xl font-black" style="background:linear-gradient(90deg,#fff,#ff1e56);background-clip:text;-webkit-background-clip:text;color:transparent">
+          Chasing Liberty
+        </h1>
+        <p class="text-sm opacity-70 mt-1">Independent • Verified • African Voices</p>
       </div>
-      <a href="/" class="px-6 py-3 bg-red-600 rounded-full hover:bg-red-700 transition">Back to Agency</a>
+      <a href="/" class="btn-red">Back to Agency</a>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-6 py-12">
-    <h2 class="text-5xl font-bold text-center mb-4">Latest Stories</h2>
-    <p class="text-xl text-center opacity-80 mb-12">Fresh South African & African news — updated daily</p>
+  <main class="pt-32 pb-20 px-8 max-w-7xl mx-auto">
 
-    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="col-span-full text-center py-20 text-2xl opacity-60">Loading today's headlines...</div>
+    <h2 class="text-7xl font-black text-center mb-6">LATEST STORIES</h2>
+    <p class="text-2xl text-center opacity-80 mb-16">Fresh South African & African news — updated daily</p>
+
+    <!-- NEWS GRID -->
+    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+      <div class="col-span-full text-center py-24 text-3xl opacity-50">Loading today's headlines...</div>
+    </div>
+
+    <!-- NEWSLETTER SIGNUP – SAME STYLE AS MAIN SITE -->
+    <div class="glass p-12 rounded-3xl text-center max-w-4xl mx-auto border border-white/20">
+      <h3 class="text-4xl font-black mb-6">Never Miss a Story</h3>
+      <p class="text-xl opacity-80 mb-10">Get the top headlines delivered to your inbox every morning</p>
+      <form id="newsletterForm" class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+        <input type="email" placeholder="Your email address" required class="flex-1 px-8 py-5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 text-lg">
+        <button type="submit" class="btn-red">Subscribe Now</button>
+      </form>
+      <p id="msg" class="mt-6 text-lg"></p>
     </div>
   </main>
 
+  <!-- CLIENT-SIDE RSS FETCH (working perfectly) -->
   <script>
-    // RSS Feeds – South African Sources
     const FEEDS = [
       'https://www.news24.com/rss',
       'https://www.iol.co.za/rss',
@@ -40,58 +61,10 @@
       'https://www.businesslive.co.za/rss'
     ];
 
-    // Fetch & Display News (Client-Side – No API Needed)
-    async function loadNews() {
-      const grid = document.getElementById('newsGrid');
-      grid.innerHTML = '<div class="col-span-full text-center py-10 opacity-60">Fetching fresh news...</div>';
+    async function loadNews(){const grid=document.getElementById('newsGrid');grid.innerHTML='<div class="col-span-full text-center py-20 opacity-60 text-3xl">Loading...</div>';let all=[];for(const url of FEEDS){try{const r=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);const d=await r.json();if(d.status==='ok'){d.items.slice(0,4).forEach(i=>{all.push({title:i.title,link:i.link,date:i.pubDate,snippet:i.description.replace(/<[^>]*>/g,'').substring(0,160)+'...',source:new URL(i.link).hostname.replace('www.','')})})}}catch(e){}}all.sort((a,b)=>new Date(b.date)-new Date(a.date));grid.innerHTML='';all.slice(0,15).forEach(a=>{const c=document.createElement('article');c.className='glass p-8 rounded-2xl hover:bg-white/10 transition';c.innerHTML=`<h3 class="text-2xl font-bold mb-3">${a.title}</h3><p class="text-sm opacity-70 mb-4">${a.source} • ${new Date(a.date).toLocaleDateString('en-ZA')}</p><p class="opacity-90 mb-6 leading-relaxed">${a.snippet}</p><a href="${a.link}" target="_blank" class="btn-red inline-block">Read Full Story</a>`;grid.appendChild(c)})}
+    loadNews();setInterval(loadNews,6*60*60*1000);
 
-      let allArticles = [];
-      for (const url of FEEDS) {
-        try {
-          const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
-          const data = await response.json();
-          if (data.status === 'ok') {
-            data.items.slice(0, 3).forEach(item => {  // 3 per feed
-              allArticles.push({
-                title: item.title,
-                link: item.link,
-                date: item.pubDate,
-                snippet: item.description.substring(0, 150) + '...',
-                source: new URL(item.link).hostname.replace('www.', '')
-              });
-            });
-          }
-        } catch (e) {
-          console.log('Feed failed:', url);
-        }
-      }
-
-      // Sort newest first
-      allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      grid.innerHTML = '';
-      allArticles.slice(0, 12).forEach(article => {
-        const card = document.createElement('article');
-        card.className = 'bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition';
-        card.innerHTML = `
-          <h3 class="text-xl font-bold mb-2 leading-tight">${article.title}</h3>
-          <p class="text-sm opacity-70 mb-3">${article.source} • ${new Date(article.date).toLocaleDateString('en-ZA')}</p>
-          <p class="opacity-80 mb-4 leading-relaxed">${article.snippet}</p>
-          <a href="${article.link}" target="_blank" class="inline-block px-5 py-3 bg-red-600 rounded-full hover:bg-red-700 transition font-bold">Read Full Story</a>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    // Load on page ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadNews);
-    } else {
-      loadNews();
-    }
-
-    // Auto-refresh every 6 hours
-    setInterval(loadNews, 6 * 60 * 60 * 1000);
+    // NEWSLETTER FORM
+    document.getElementById('newsletterForm').addEventListener('submit',async(e)=>{e.preventDefault();const email=e.target[0].value;const msg=document.getElementById('msg');msg.textContent='Subscribing...';try{const res=await fetch('https://api.convertkit.com/v3/forms/7508002/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({api_key:'YOUR_API_KEY_HERE',email})});if(res.ok){msg.innerHTML='<span class="text-green-400">Success! Check your inbox</span>'}else{msg.innerHTML='<span class="text-red-400">Try again later</span>'}}catch{msg.innerHTML='<span class="text-red-400">Network error</span>'}});
   </script>
-</body>
-</html>
+</body></html>
