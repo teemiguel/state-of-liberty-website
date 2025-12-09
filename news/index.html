@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOL • Newsfeed</title>
+  <title>Chasing Liberty • News</title>
   <meta name="description" content="Independent South African & African news – updated daily">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +13,7 @@
     .division-card{background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;transition:0.4s;border:2px solid transparent;position:relative;}
     .division-card:hover{border-color:#ff1e56;transform:translateY(-12px);box-shadow:0 30px 60px rgba(255,30,86,0.4);}
     .card-image{width:100%;height:200px;object-fit:cover;}
-    .card-content{padding:30функpx;text-align:center;}
+    .card-content{padding:30px;text-align:center;}
     .article-title{font-size:2rem;margin-bottom:12px;color:#ff1e56;font-weight:700;}
     .article-source{opacity:0.8;font-size:0.95rem;margin-bottom:8px;}
     header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);padding:20px 0;border-bottom:1px solid rgba(255,30,86,0.2);}
@@ -21,32 +21,37 @@
     .logo{font-size:36px;font-weight:900;}
     .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
     .back-btn:hover{background:#ff3366;}
-    .newsletter{background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border:2px solid #ff1e56;border-radius:24px;padding:60px 40px;margin:120px auto;text-align:center;max-width:700px;}
-    .newsletter h3{font-family:'Orbitron',sans-serif;font-size:3rem;color:#ff1e56;margin-bottom:20px;}
-    .newsletter p{font-size:1.3rem;opacity:0.9;margin-bottom:40px;}
-    .newsletter input{width:100%;max-width:420px;padding:18px 24px;border-radius:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1.1rem;margin-bottom:20px;}
-    .newsletter input::placeholder{color:rgba(255,255,255,0.6);}
-    .newsletter button{background:#ff1e56;padding:18px 50px;border-radius:50px;font-weight:700;font-size:1.2rem;border:none;cursor:pointer;transition:0.3s;}
-    .newsletter button:hover{background:#ff3366;transform:scale(1.05);}
-    #msg{margin-top:20px;font-size:1.1rem;}
+    .filter-bar{text-align:center;margin:40px 0;}
+    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;margin:0 8px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;}
+    .filter-btn:hover,.filter-btn.active{background:#ff1e56;border-color:#ff1e56;}
   </style>
 </head>
 <body>
 
   <header>
     <div class="container header-content">
-      <div class="logo">SOL <span style="color:#ff1e56;">Newsfeed</span></div>
+      <div class="logo">Chasing <span style="color:#ff1e56;">Liberty</span></div>
       <a href="/" class="back-btn">Back to Agency</a>
     </div>
   </header>
 
-  <section style="padding:160px 20px 80px;">
+  <section style="padding:160px 20px 120px;">
     <div class="container">
-      <h2 style="font-size:4.5rem;text-align:center;margin-bottom:80px;">
+      <h2 style="font-size:4.5rem;text-align:center;margin-bottom:40px;">
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
 
-      <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;">
+      <!-- CATEGORY FILTERS -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="Local">Local</button>
+        <button class="filter-btn" data-category="Politics">Politics</button>
+        <button class="filter-btn" data-category="Business">Business</button>
+        <button class="filter-btn" data-category="Tech">Tech</button>
+        <button class="filter-btn" data-category="Culture">Culture</button>
+      </div>
+
+      <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;margin-top:40px;">
         <div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">
           Loading today's headlines...
         </div>
@@ -54,55 +59,43 @@
     </div>
   </section>
 
-  <!-- NEWSLETTER SECTION – MAIN SITE STYLE -->
-  <section class="newsletter">
-    <h3>Never Miss a Beat</h3>
-    <p>Get the top South African headlines in your inbox every morning</p>
-    <form id="newsletterForm">
-      <input type="email" placeholder="your@email.com" required>
-      <button type="submit">Subscribe Free</button>
-    </form>
-    <div id="msg"></div>
-  </section>
-
   <script>
-    const FEEDS = [
-      'https://www.news24.com/rss',
-      'https://www.iol.co.za/rss',
-      'https://mg.co.za/feed/',
-      'https://www.dailymaverick.co.za/feed/',
-      'https://mybroadband.co.za/news/feed/',
-      'https://www.businesslive.co.za/rss'
-    ];
+    const FEEDS = {
+      Local: ['https://www.news24.com/rss', 'https://www.iol.co.za/rss'],
+      Politics: ['https://mg.co.za/feed/category/politics/'],
+      Business: ['https://www.businesslive.co.za/rss'],
+      Tech: ['https://mybroadband.co.za/news/feed/'],
+      Culture: ['https://www.thesouthafrican.com/rss/category/culture/'],
+    };
 
-    async function loadNews() {
+    async function loadNews(category = 'all') {
       const grid = document.getElementById('newsGrid');
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading...</div>';
+
+      let feedsToUse = category === 'all' ? Object.values(FEEDS).flat() : FEEDS[category] || [];
 
       let allArticles = [];
-      for (const url of FEEDS) {
+      for (const url of feedsToUse) {
         try {
           const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
           const data = await res.json();
           if (data.status === 'ok') {
-            data.items.slice(0, 5).forEach(item => {
-              const img = item.enclosure?.link || item.thumbnail || (item.description.match(/src=["'](.*?)["']/)?.[1]) || 'https://via.placeholder.com/600x400/111/333?text=News';
+            data.items.slice(0, 6).forEach(item => {
+              const img = item.enclosure?.link || item.thumbnail || (item.description.match(/src=["'](.*?["'])/)?.[1]) || 'https://via.placeholder.com/600x400/111/333?text=News';
               allArticles.push({
                 title: item.title,
                 link: item.link,
                 image: img,
                 snippet: item.description.replace(/<[^>]*>/g, '').substring(0, 130) + '...',
-                source: new URL(item.link).hostname.replace('www.', '').split('.')[0].charAt(0).toUpperCase() + new URL(item.link).hostname.replace('www.', '').split('.')[0].slice(1)
+                source: new URL(item.link).hostname.replace('www.', '').split('.')[0].toUpperCase()
               });
             });
           }
         } catch (e) {}
       }
 
-      allArticles.sort(() => Math.random() - 0.5);
       grid.innerHTML = '';
-
-      allArticles.slice(0, 15).forEach(article => {
+      allArticles.forEach(article => {
         const card = document.createElement('a');
         card.href = article.link;
         card.target = '_blank';
@@ -120,24 +113,18 @@
         grid.appendChild(card);
       });
     }
-    loadNews();
-    setInterval(loadNews, 6*60*60*1000);
 
-    // NEWSLETTER FORM
-    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('input').value;
-      const msg = document.getElementById('msg');
-      msg.innerHTML = 'Subscribing...';
-
-      // Replace with your real ConvertKit / Mailchimp / Brevo form URL
-      fetch('https://YOUR-PROVIDER-API-ENDPOINT', {
-        method: 'POST',
-        body: JSON.stringify({email})
-      })
-      .then(() => msg.innerHTML = '<span style="color:#10b981;">Success! Check your email</span>')
-      .catch(() => msg.innerHTML = '<span style="color:#ef4444;">Try again later</span>');
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadNews(btn.dataset.category);
+      });
     });
+
+    loadNews(); // Initial load (All)
+    setInterval(loadNews, 6*60*60*1000); // Refresh every 6 hours
   </script>
 </body>
 </html>
