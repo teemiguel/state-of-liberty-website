@@ -21,17 +21,9 @@
     .logo{font-size:36px;font-weight:900;}
     .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
     .back-btn:hover{background:#ff3366;}
-    .search-bar{margin:40px 0;text-align:center;}
-    .search-input{width:100%;max-width:600px;padding:18px 24px;border-radius:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1.2rem;}
-    .search-input::placeholder{color:rgba(255,255,255,0.6);}
-    .newsletter{background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border:2px solid #ff1e56;border-radius:24px;padding:60px 40px;margin:120px auto;text-align:center;max-width:700px;}
-    .newsletter h3{font-family:'Orbitron',sans-serif;font-size:3rem;color:#ff1e56;margin-bottom:20px;}
-    .newsletter p{font-size:1.3rem;opacity:0.9;margin-bottom:40px;}
-    .newsletter input{width:100%;max-width:420px;padding:18px 24px;border-radius:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1.1rem;margin-bottom:20px;}
-    .newsletter input::placeholder{color:rgba(255,255,255,0.6);}
-    .newsletter button{background:#ff1e56;padding:18px 50px;border-radius:50px;font-weight:700;font-size:1.2rem;border:none;cursor:pointer;transition:0.3s;}
-    .newsletter button:hover{background:#ff3366;transform:scale(1.05);}
-    #msg{margin-top:20px;font-size:1.1rem;}
+    .filter-bar{text-align:center;margin:60px 0;}
+    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;margin:0 10px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;}
+    .filter-btn:hover,.filter-btn.active{background:#ff1e56;border-color:#ff1e56;}
   </style>
 </head>
 <body>
@@ -43,15 +35,20 @@
     </div>
   </header>
 
-  <section style="padding:160px 20px 80px;">
+  <section style="padding:160px 20px 120px;">
     <div class="container">
       <h2 style="font-size:4.5rem;text-align:center;margin-bottom:40px;">
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
 
-      <!-- SEARCH BAR -->
-      <div class="search-bar">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search headlines...">
+      <!-- CATEGORY FILTERS -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="Local">Local</button>
+        <button class="filter-btn" data-category="Politics">Politics</button>
+        <button class="filter-btn" data-category="Business">Business</button>
+        <button class="filter-btn" data-category="Tech">Tech</button>
+        <button class="filter-btn" data-category="Culture">Culture</button>
       </div>
 
       <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;margin-top:40px;">
@@ -62,54 +59,67 @@
     </div>
   </section>
 
-  <!-- NEWSLETTER SIGNUP -->
-  <section class="newsletter">
-    <h3>Never Miss a Story</h3>
-    <p>Get the top headlines delivered to your inbox every morning</p>
-    <form id="newsletterForm">
-      <input type="email" placeholder="your@email.com" required>
-      <button type="submit">Subscribe Now</button>
-    </form>
-    <div id="msg"></div>
-  </section>
-
   <script>
-    // MORE SOUTH AFRICAN SOURCES (10+ top outlets)
-    const FEEDS = [
-      'https://www.news24.com/rss',
-      'https://www.iol.co.za/rss',
-      'https://mg.co.za/feed/',
-      'https://www.dailymaverick.co.za/feed/',
-      'https://mybroadband.co.za/news/feed/',
-      'https://www.businesslive.co.za/rss',
-      'https://www.enca.com/rss', // eNCA
-      'https://www.sabcnews.com/sabcnews/rss-feeds/', // SABC
-      'https://www.timeslive.co.za/rss', // TimesLIVE
-      'https://www.iol.co.za/capetimes/rss' // Cape Times via IOL
-    ];
+    // CATEGORIZED FEEDS – MORE SOUTH AFRICAN SOURCES
+    const FEEDS = {
+      all: [
+        'https://www.news24.com/rss',
+        'https://www.iol.co.za/rss',
+        'https://mg.co.za/feed/',
+        'https://www.dailymaverick.co.za/feed/',
+        'https://mybroadband.co.za/news/feed/',
+        'https://www.businesslive.co.za/rss',
+        'https://www.enca.com/rss',
+        'https://www.timeslive.co.za/rss',
+        'https://www.sabcnews.com/sabcnews/rss-feeds/'
+      ],
+      Local: [
+        'https://www.news24.com/rss',
+        'https://www.iol.co.za/rss',
+        'https://www.dailymaverick.co.za/feed/',
+        'https://www.timeslive.co.za/rss'
+      ],
+      Politics: [
+        'https://mg.co.za/feed/',
+        'https://www.news24.com/rss',
+        'https://www.iol.co.za/rss'
+      ],
+      Business: [
+        'https://www.businesslive.co.za/rss',
+        'https://www.news24.com/rss'
+      ],
+      Tech: [
+        'https://mybroadband.co.za/news/feed/',
+        'https://www.news24.com/rss'
+      ],
+      Culture: [
+        'https://www.thesouthafrican.com/rss/category/culture/',
+        'https://mg.co.za/feed/'
+      ]
+    };
 
     let allArticles = [];
 
-    async function loadNews() {
+    async function loadNews(category = 'all') {
       const grid = document.getElementById('newsGrid');
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading...</div>';
+
+      const feeds = FEEDS[category] || FEEDS.all;
 
       allArticles = [];
-      for (const url of FEEDS) {
+      for (const url of feeds) {
         try {
           const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
           const data = await res.json();
           if (data.status === 'ok') {
-            data.items.slice(0, 5).forEach(item => {
+            data.items.slice(0, 6).forEach(item => {
               const img = item.enclosure?.link || item.thumbnail || (item.description.match(/src=["'](.*?["'])/)?.[1]) || 'https://via.placeholder.com/600x400/111/333?text=News';
               allArticles.push({
                 title: item.title,
                 link: item.link,
                 image: img,
                 snippet: item.description.replace(/<[^>]*>/g, '').substring(0, 130) + '...',
-                source: new URL(item.link).hostname.replace('www.', '').split('.')[0].toUpperCase(),
-                lowerTitle: item.title.toLowerCase(),
-                lowerSnippet: item.description.replace(/<[^>]*>/g, '').toLowerCase()
+                source: new URL(item.link).hostname.replace('www.', '').split('.')[0].toUpperCase()
               });
             });
           }
@@ -141,28 +151,17 @@
       });
     }
 
-    // SEARCH BAR
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const query = this.value.toLowerCase().trim();
-      if (query === '') {
-        displayArticles(allArticles);
-      } else {
-        const filtered = allArticles.filter(a => a.lowerTitle.includes(query) || a.lowerSnippet.includes(query));
-        displayArticles(filtered);
-      }
+    // FILTER BUTTONS
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadNews(btn.dataset.category);
+      });
     });
 
     loadNews();
-    setInterval(loadNews, 6*60*60*1000);
-
-    // NEWSLETTER (replace with your real provider)
-    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const msg = document.getElementById('msg');
-      msg.innerHTML = 'Subscribing...';
-      // Add your ConvertKit/Mailchimp/Brevo endpoint here
-      msg.innerHTML = '<span style="color:#10b981;">Success! Check your inbox</span>';
-    });
+    setInterval(() => loadNews(document.querySelector('.filter-btn.active').dataset.category), 6*60*60*1000);
   </script>
 </body>
 </html>
