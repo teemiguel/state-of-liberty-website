@@ -21,9 +21,17 @@
     .logo{font-size:36px;font-weight:900;}
     .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
     .back-btn:hover{background:#ff3366;}
-    .filter-bar{text-align:center;margin:60px 0;}
-    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;margin:0 10px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;}
+    .filter-bar{text-align:center;margin:60px 0;overflow-x:auto;white-space:nowrap;padding:10px 0;}
+    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;margin:0 10px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;display:inline-block;}
     .filter-btn:hover,.filter-btn.active{background:#ff1e56;border-color:#ff1e56;}
+    .newsletter{background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border:2px solid #ff1e56;border-radius:24px;padding:60px 40px;margin:120px auto;text-align:center;max-width:700px;}
+    .newsletter h3{font-family:'Orbitron',sans-serif;font-size:3rem;color:#ff1e56;margin-bottom:20px;}
+    .newsletter p{font-size:1.3rem;opacity:0.9;margin-bottom:40px;}
+    .newsletter input{width:100%;max-width:420px;padding:18px 24px;border-radius:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1.1rem;margin-bottom:20px;}
+    .newsletter input::placeholder{color:rgba(255,255,255,0.6);}
+    .newsletter button{background:#ff1e56;padding:18px 50px;border-radius:50px;font-weight:700;font-size:1.2rem;border:none;cursor:pointer;transition:0.3s;}
+    .newsletter button:hover{background:#ff3366;transform:scale(1.05);}
+    #msg{margin-top:20px;font-size:1.1rem;}
   </style>
 </head>
 <body>
@@ -35,20 +43,28 @@
     </div>
   </header>
 
-  <section style="padding:160px 20px 120px;">
+  <section style="padding:160px 20px 80px;">
     <div class="container">
       <h2 style="font-size:4.5rem;text-align:center;margin-bottom:40px;">
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
 
-      <!-- CATEGORY FILTERS -->
+      <!-- CATEGORY FILTERS – MORE CATEGORIES -->
       <div class="filter-bar">
         <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="News">News</button>
         <button class="filter-btn" data-category="Local">Local</button>
         <button class="filter-btn" data-category="Politics">Politics</button>
         <button class="filter-btn" data-category="Business">Business</button>
         <button class="filter-btn" data-category="Tech">Tech</button>
         <button class="filter-btn" data-category="Culture">Culture</button>
+        <button class="filter-btn" data-category="Entertainment">Entertainment</button>
+        <button class="filter-btn" data-category="Lifestyle">Lifestyle</button>
+        <button class="filter-btn" data-category="Finance">Finance</button>
+        <button class="filter-btn" data-category="Sports">Sports</button>
+        <button class="filter-btn" data-category="Health">Health</button>
+        <button class="filter-btn" data-category="Cars">Cars</button>
+        <button class="filter-btn" data-category="Travel">Travel</button>
       </div>
 
       <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;margin-top:40px;">
@@ -59,8 +75,19 @@
     </div>
   </section>
 
+  <!-- NEWSLETTER SIGNUP -->
+  <section class="newsletter">
+    <h3>Never Miss a Story</h3>
+    <p>Get the top headlines delivered to your inbox every morning</p>
+    <form id="newsletterForm">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe Now</button>
+    </form>
+    <div id="msg"></div>
+  </section>
+
   <script>
-    // CATEGORIZED FEEDS – MORE SOUTH AFRICAN SOURCES
+    // MORE SOURCES + CATEGORIZED FEEDS
     const FEEDS = {
       all: [
         'https://www.news24.com/rss',
@@ -71,31 +98,24 @@
         'https://www.businesslive.co.za/rss',
         'https://www.enca.com/rss',
         'https://www.timeslive.co.za/rss',
-        'https://www.sabcnews.com/sabcnews/rss-feeds/'
+        'https://www.sabcnews.com/sabcnews/rss-feeds/',
+        'https://www.thesouthafrican.com/feed/',
+        'https://briefly.co.za/feed/',
+        'https://www.sowetanlive.co.za/rss/'
       ],
-      Local: [
-        'https://www.news24.com/rss',
-        'https://www.iol.co.za/rss',
-        'https://www.dailymaverick.co.za/feed/',
-        'https://www.timeslive.co.za/rss'
-      ],
-      Politics: [
-        'https://mg.co.za/feed/',
-        'https://www.news24.com/rss',
-        'https://www.iol.co.za/rss'
-      ],
-      Business: [
-        'https://www.businesslive.co.za/rss',
-        'https://www.news24.com/rss'
-      ],
-      Tech: [
-        'https://mybroadband.co.za/news/feed/',
-        'https://www.news24.com/rss'
-      ],
-      Culture: [
-        'https://www.thesouthafrican.com/rss/category/culture/',
-        'https://mg.co.za/feed/'
-      ]
+      News: ['https://www.news24.com/rss', 'https://www.iol.co.za/rss', 'https://www.dailymaverick.co.za/feed/'],
+      Local: ['https://www.iol.co.za/rss', 'https://www.news24.com/rss', 'https://www.timeslive.co.za/rss'],
+      Politics: ['https://mg.co.za/feed/', 'https://www.news24.com/rss'],
+      Business: ['https://www.businesslive.co.za/rss', 'https://mybroadband.co.za/news/feed/'],
+      Tech: ['https://mybroadband.co.za/news/feed/', 'https://www.news24.com/rss'],
+      Culture: ['https://www.thesouthafrican.com/rss/category/culture/', 'https://mg.co.za/feed/'],
+      Entertainment: ['https://www.thesouthafrican.com/feed/', 'https://www.sowetanlive.co.za/rss/'],
+      Lifestyle: ['https://www.iol.co.za/rss', 'https://www.timeslive.co.za/rss'],
+      Finance: ['https://www.businesslive.co.za/rss'],
+      Sports: ['https://www.sabcnews.com/sabcnews/rss-feeds/', 'https://www.news24.com/rss'],
+      Health: ['https://www.news24.com/rss', 'https://www.iol.co.za/rss'],
+      Cars: ['https://www.iol.co.za/rss', 'https://mybroadband.co.za/news/feed/'],
+      Travel: ['https://www.thesouthafrican.com/feed/', 'https://www.iol.co.za/rss']
     };
 
     let allArticles = [];
@@ -162,6 +182,15 @@
 
     loadNews();
     setInterval(() => loadNews(document.querySelector('.filter-btn.active').dataset.category), 6*60*60*1000);
+
+    // NEWSLETTER
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('msg');
+      msg.innerHTML = 'Subscribing...';
+      // Replace with your real provider endpoint
+      msg.innerHTML = '<span style="color:#10b981;">Success! Check your inbox</span>';
+    });
   </script>
 </body>
 </html>
