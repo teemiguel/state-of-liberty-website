@@ -6,19 +6,19 @@
   <title>The Liberty Feed – SOL Creatives</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    body{background:#000;color:#fff;font-family:'Inter',sans-serif;display:flex;flex-direction:column;min-height:100vh;margin:0;}
-    header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);padding:20px 0;border-bottom:1px solid rgba(255,30,86,0.2);}
-    .header-content{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
-    .logo{font-size:36px;font-weight:900;}
-    .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
-    .back-btn:hover{background:#ff3366;}
-    main{flex:1;display:flex;align-items:center;justify-content:center;padding:160px 20px 100px;}
-    .feed-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px;max-width:1200px;width:100%;}
-    .option-card{background:rgba(255,255,255,0.05);border:2px solid transparent;border-radius:24px;padding:60px;text-align:center;transition:0.4s;cursor:pointer;}
-    .option-card:hover{border-color:#ff1e56;transform:translateY(-15px);box-shadow:0 30px 60px rgba(255,30,86,0.4);}
-    .option-title{font-family:'Orbitron',sans-serif;font-size:3.5rem;margin-bottom:20px;color:#ff1e56;}
-    .option-desc{font-size:1.4rem;opacity:0.9;margin-bottom:30px;}
-    .coming-soon{font-size:6rem;color:#ff1e56;opacity:0.2;font-family:'Orbitron',sans-serif;}
+    body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 20px 0; border-bottom: 1px solid rgba(255,30,86,0.2); }
+    .header-content { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 36px; font-weight: 900; }
+    .back-btn { background: #ff1e56; padding: 16px 40px; border-radius: 50px; font-weight: 700; transition: 0.3s; }
+    .back-btn:hover { background: #ff3366; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 160px 20px 100px; }
+    .feed-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; max-width: 1200px; width: 100%; }
+    .option-card { background: rgba(255,255,255,0.05); border: 2px solid transparent; border-radius: 24px; padding: 60px; text-align: center; transition: 0.4s; cursor: pointer; }
+    .option-card:hover { border-color: #ff1e56; transform: translateY(-15px); box-shadow: 0 30px 60px rgba(255,30,86,0.4); }
+    .option-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; margin-bottom: 20px; color: #ff1e56; }
+    .option-desc { font-size: 1.4rem; opacity: 0.9; margin-bottom: 30px; }
+    .coming-soon { font-family: 'Orbitron', sans-serif; font-size: 6rem; color: #ff1e56; opacity: 0.2; }
   </style>
 </head>
 <body>
@@ -40,13 +40,11 @@
       </div>
 
       <!-- CHASING LIBERTY -->
-      <a href="/news" style="text-decoration:none;color:inherit;">
-        <div class="option-card">
-          <div class="option-title">Chasing Liberty</div>
-          <div class="option-desc">Real-time South African & African news — powered by top sources</div>
-          <div style="font-size:1.6rem;font-weight:700;color:#10b981;">LIVE NOW →</div>
-        </div>
-      </a>
+      <div class="option-card" onclick="window.location.href='/news'">
+        <div class="option-title">Chasing Liberty</div>
+        <div class="option-desc">Real-time South African & African news — powered by top sources</div>
+        <div style="font-size:1.6rem;font-weight:700;color:#10b981;">LIVE NOW →</div>
+      </div>
     </div>
   </main>
 
