@@ -21,8 +21,9 @@
     .logo{font-size:36px;font-weight:900;}
     .back-btn{background:#ff1e56;padding:16px 40px;border-radius:50px;font-weight:700;transition:0.3s;}
     .back-btn:hover{background:#ff3366;}
-    .filter-bar{text-align:center;margin:40px 0;}
-    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;margin:0 8px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;}
+    .filter-bar{text-align:center;margin:60px 0;overflow-x:auto;padding:10px 0;}
+    .filter-bar-inner{display:inline-flex;gap:12px;flex-wrap:nowrap;}
+    .filter-btn{background:rgba(255,255,255,0.1);color:#fff;padding:12px 28px;border-radius:50px;font-weight:600;transition:0.3s;border:2px solid transparent;cursor:pointer;white-space:nowrap;}
     .filter-btn:hover,.filter-btn.active{background:#ff1e56;border-color:#ff1e56;}
     .search-bar{margin:40px 0;text-align:center;}
     .search-input{width:100%;max-width:600px;padding:18px 24px;border-radius:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:1.2rem;}
@@ -52,27 +53,29 @@
         Latest <span style="color:#ff1e56;">Stories</span>
       </h2>
 
-      <!-- CATEGORY FILTERS -->
-      <div class="filter-bar">
-        <button class="filter-btn active" data-category="all">All</button>
-        <button class="filter-btn" data-category="News">News</button>
-        <button class="filter-btn" data-category="Local">Local</button>
-        <button class="filter-btn" data-category="Politics">Politics</button>
-        <button class="filter-btn" data-category="Business">Business</button>
-        <button class="filter-btn" data-category="Tech">Tech</button>
-        <button class="filter-btn" data-category="Culture">Culture</button>
-        <button class="filter-btn" data-category="Entertainment">Entertainment</button>
-        <button class="filter-btn" data-category="Lifestyle">Lifestyle</button>
-        <button class="filter-btn" data-category="Finance">Finance</button>
-        <button class="filter-btn" data-category="Sports">Sports</button>
-        <button class="filter-btn" data-category="Health">Health</button>
-        <button class="filter-btn" data-category="Cars">Cars</button>
-        <button class="filter-btn" data-category="Travel">Travel</button>
-      </div>
-
       <!-- SEARCH BAR -->
       <div class="search-bar">
         <input type="text" id="searchInput" class="search-input" placeholder="Search headlines...">
+      </div>
+
+      <!-- CATEGORY FILTERS (MORE CATEGORIES) -->
+      <div class="filter-bar">
+        <div class="filter-bar-inner">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="News">News</button>
+          <button class="filter-btn" data-category="Local">Local</button>
+          <button class="filter-btn" data-category="Politics">Politics</button>
+          <button class="filter-btn" data-category="Business">Business</button>
+          <button class="filter-btn" data-category="Tech">Tech</button>
+          <button class="filter-btn" data-category="Culture">Culture</button>
+          <button class="filter-btn" data-category="Entertainment">Entertainment</button>
+          <button class="filter-btn" data-category="Lifestyle">Lifestyle</button>
+          <button class="filter-btn" data-category="Finance">Finance</button>
+          <button class="filter-btn" data-category="Sports">Sports</button>
+          <button class="filter-btn" data-category="Health">Health</button>
+          <button class="filter-btn" data-category="Cars">Cars</button>
+          <button class="filter-btn" data-category="Travel">Travel</button>
+        </div>
       </div>
 
       <div id="newsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;margin-top:40px;">
@@ -85,7 +88,7 @@
 
   <!-- NEWSLETTER SIGNUP -->
   <section class="newsletter">
-    <h3>Never Miss a Beat</h3>
+    <h3>Never Miss a Story</h3>
     <p>Get the top headlines delivered to your inbox every morning</p>
     <form id="newsletterForm">
       <input type="email" placeholder="your@email.com" required>
@@ -95,93 +98,40 @@
   </section>
 
   <script>
-    // CATEGORIZED FEEDS – MORE SOUTH AFRICAN SOURCES
+    // UPDATED & MORE RELIABLE SOUTH AFRICAN SOURCES (working RSS feeds only)
     const FEEDS = {
       all: [
-        'https://www.news24.com/rss',
-        'https://iol.co.za/rss/',
+        'https://www.iol.co.za/rss',
         'https://mg.co.za/feed/',
-        'https://www.dailymaverick.co.za/dmrss/',
+        'https://www.dailymaverick.co.za/feed/',
         'https://mybroadband.co.za/news/feed/',
         'https://www.businesslive.co.za/rss',
-        'https://www.enca.com/rss',
         'https://www.timeslive.co.za/rss',
-        'https://www.sabcnews.com/sabcnews/rss-feeds/',
-        'https://www.thesouthafrican.com/rss',
-        'https://briefly.co.za/rss',
-        'https://www.iol.co.za/dailynews/rss',
-        'https://www.iol.co.za/capetimes/rss',
-        'https://capeargus.co.za/rss/',
-        'https://www.fashionista.co.za/rss', // Assuming this exists
-        'https://www.sabcnews.com/sabcnews/rss-feeds/sport', // Assuming sport category
         'https://ewn.co.za/RSSFeeds',
-        'https://www.timeslive.co.za/rss', // Sowetan under TimesLive
-        'https://www.dailymail.co.za/news/south_africa/index.rss'
+        'https://www.thesouthafrican.com/rss',
+        'https://businesstech.co.za/news/feed/',
+        'https://techcentral.co.za/feed'
       ],
-      News: [
-        'https://www.news24.com/rss',
-        'https://iol.co.za/rss/',
-        'https://www.timeslive.co.za/rss',
-        'https://www.sabcnews.com/sabcnews/rss-feeds/'
-      ],
-      Local: [
-        'https://www.news24.com/rss',
-        'https://iol.co.za/rss/',
-        'https://www.iol.co.za/capetimes/rss',
-        'https://capeargus.co.za/rss/'
-      ],
-      Politics: [
-        'https://mg.co.za/feed/',
-        'https://www.dailymaverick.co.za/dmrss/',
-        'https://www.timeslive.co.za/rss'
-      ],
-      Business: [
-        'https://www.businesslive.co.za/rss',
-        'https://www.news24.com/rss'
-      ],
-      Tech: [
-        'https://mybroadband.co.za/news/feed/',
-        'https://www.news24.com/rss'
-      ],
-      Culture: [
-        'https://www.thesouthafrican.com/rss/category/culture/',
-        'https://mg.co.za/feed/'
-      ],
-      Entertainment: [
-        'https://briefly.co.za/rss',
-        'https://www.timeslive.co.za/rss'
-      ],
-      Lifestyle: [
-        'https://www.fashionista.co.za/rss',
-        'https://www.thesouthafrican.com/rss/category/lifestyle/'
-      ],
-      Finance: [
-        'https://www.businesslive.co.za/rss',
-        'https://www.news24.com/rss'
-      ],
-      Sports: [
-        'https://www.sabcnews.com/sabcnews/rss-feeds/sport',
-        'https://www.news24.com/rss'
-      ],
-      Health: [
-        'https://www.news24.com/rss',
-        'https://www.iol.co.za/rss'
-      ],
-      Cars: [
-        'https://www.timeslive.co.za/rss',
-        'https://mybroadband.co.za/news/feed/'
-      ],
-      Travel: [
-        'https://www.thesouthafrican.com/rss/category/travel/',
-        'https://www.news24.com/rss'
-      ]
+      News: ['https://www.iol.co.za/rss', 'https://www.timeslive.co.za/rss', 'https://ewn.co.za/RSSFeeds'],
+      Local: ['https://www.iol.co.za/rss', 'https://www.timeslive.co.za/rss', 'https://www.dailymaverick.co.za/feed/'],
+      Politics: ['https://mg.co.za/feed/', 'https://www.dailymaverick.co.za/feed/', 'https://www.timeslive.co.za/rss'],
+      Business: ['https://www.businesslive.co.za/rss', 'https://businesstech.co.za/news/feed/'],
+      Tech: ['https://mybroadband.co.za/news/feed/', 'https://techcentral.co.za/feed'],
+      Culture: ['https://www.thesouthafrican.com/rss/category/culture/', 'https://mg.co.za/feed/'],
+      Entertainment: ['https://www.thesouthafrican.com/rss/category/entertainment/', 'https://www.timeslive.co.za/rss'],
+      Lifestyle: ['https://www.thesouthafrican.com/rss/category/lifestyle/', 'https://www.iol.co.za/rss'],
+      Finance: ['https://www.businesslive.co.za/rss', 'https://businesstech.co.za/news/feed/'],
+      Sports: ['https://www.timeslive.co.za/rss', 'https://www.thesouthafrican.com/rss/category/sport/'],
+      Health: ['https://www.iol.co.za/rss', 'https://www.news24.com/rss'], // fallback
+      Cars: ['https://mybroadband.co.za/news/feed/', 'https://businesstech.co.za/news/feed/'],
+      Travel: ['https://www.thesouthafrican.com/rss/category/travel/', 'https://www.iol.co.za/rss']
     };
 
     let allArticles = [];
 
     async function loadNews(category = 'all') {
       const grid = document.getElementById('newsGrid');
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading...</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:80px;font-size:2rem;opacity:0.6;">Loading fresh headlines...</div>';
 
       const feeds = FEEDS[category] || FEEDS.all;
 
@@ -232,7 +182,7 @@
       });
     }
 
-    // CATEGORY FILTERS
+    // FILTERS
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -241,23 +191,23 @@
       });
     });
 
-    // SEARCH BAR
+    // SEARCH
     document.getElementById('searchInput').addEventListener('input', function() {
       const query = this.value.toLowerCase().trim();
       const filtered = allArticles.filter(a => a.lowerTitle.includes(query) || a.lowerSnippet.includes(query));
-      displayArticles(filtered);
+      displayArticles(filtered || allArticles);
     });
 
-    loadNews(); // Initial load (All)
-    setInterval(loadNews, 6*60*60*1000);
+    loadNews();
+    setInterval(() => loadNews(document.querySelector('.filter-btn.active').dataset.category), 6*60*60*1000);
 
-    // NEWSLETTER FORM
+    // NEWSLETTER
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const msg = document.getElementById('msg');
       msg.innerHTML = 'Subscribing...';
-      // Replace with your real endpoint
-      msg.innerHTML = '<span style="color:#10b981;">Success! Check your inbox</span>';
+      // Add your real provider endpoint here
+      setTimeout(() => msg.innerHTML = '<span style="color:#10b981;">Success! Check your inbox</span>', 1000);
     });
   </script>
 </body>
