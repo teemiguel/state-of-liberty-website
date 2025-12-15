@@ -557,36 +557,32 @@
 
         <!-- YOUR THREE REAL PHOTOS -->
         <div class="freeform-grid">
-  <!-- 1. Signature Shorts -->
+  <div class="freeform-item">
+    <a href="images/freeform-merch.png" data-lightbox="freeform" data-title="Merch Collection">
+      <img src="images/freeform-merch.png" alt="Freeform Merch">
+    </a>
+    <p>Merch Collection</p>
+  </div>
+  
   <div class="freeform-item">
     <a href="images/freeform-short.png" data-lightbox="freeform" data-title="Signature Shorts">
-      <img src="images/freeform-short.png" alt="Signature Shorts">
+      <img src="images/freeform-short.png" alt="Freeform Shorts">
     </a>
     <p>Signature Shorts</p>
   </div>
-
-  <!-- 2. Hooded Denim Jacket -->
-  <div class="freeform-item">
-    <a href="images/freeform-denim-jacket.png" data-lightbox="freeform" data-title="Hooded Denim Jacket">
-      <img src="images/freeform-denim-jacket.png" alt="Hooded Denim Jacket">
-    </a>
-    <p>Hooded Denim Jacket</p>
-  </div>
-
-  <!-- 3. Varsity Jacket -->
+  
   <div class="freeform-item">
     <a href="images/freeform-jacket.png" data-lightbox="freeform" data-title="Varsity Jacket">
       <img src="images/freeform-jacket.png" alt="Varsity Jacket">
     </a>
     <p>Varsity Jacket</p>
   </div>
-
-  <!-- 4. Merch Collection -->
+  
   <div class="freeform-item">
-    <a href="images/freeform-merch.png" data-lightbox="freeform" data-title="Merch Collection">
-      <img src="images/freeform-merch.png" alt="Merch Collection">
+    <a href="images/freeform-denim-jacket.png" data-lightbox="freeform" data-title="Hooded Denim Jacket">
+      <img src="images/freeform-denim-jacket.png" alt="Hooded Denim Jacket">
     </a>
-    <p>Merch Collection</p>
+    <p>Hooded Denim Jacket</p>
   </div>
 </div>
         <a href="https://instagram.com/freeform.clo" target="_blank" class="btn btn-primary" style="padding:18px 50px; font-size:1.3rem;">
@@ -910,16 +906,13 @@ window.addEventListener('scroll', function() {
   animation:none;
 }
 </style>
-<!-- ZOOMABLE LIGHTBOX – NO NEW TAB -->
+<!-- ZOOMABLE LIGHTBOX FOR FREEFORM PHOTOS (NO NEW TAB) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-
 <style>
-  .freeform-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px; }
-  .freeform-item { text-align:center; }
-  .freeform-item img { width:100%; border-radius:16px; box-shadow:0 20px 40px rgba(255,30,86,0.25); transition:0.4s; cursor:zoom-in; }
-  .freeform-item img:hover { transform:scale(1.03); }
-  .freeform-item p { margin-top:12px; font-size:1.2rem; font-weight:600; }
+  .lb-outerContainer { background: rgba(0,0,0,0.95); border: 2px solid #ff1e56; border-radius: 16px; box-shadow: 0 0 60px rgba(255,30,86,0.5); }
+  .lb-image { border-radius: 12px; }
+  .lb-close, .lb-nav { color: #ff1e56; }
 </style>
 </body>
 </html>
