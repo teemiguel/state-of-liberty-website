@@ -556,35 +556,37 @@
         </p>
 
         <!-- YOUR THREE REAL PHOTOS -->
-        <div class="freeform-grid">
-  <div class="freeform-item">
-    <a href="images/freeform-merch.png" data-lightbox="freeform" data-title="Merch Collection">
-      <img src="images/freeform-merch.png" alt="Freeform Merch">
-    </a>
-    <p>Merch Collection</p>
-  </div>
-  
-  <div class="freeform-item">
-    <a href="images/freeform-short.png" data-lightbox="freeform" data-title="Signature Shorts">
-      <img src="images/freeform-short.png" alt="Freeform Shorts">
-    </a>
-    <p>Signature Shorts</p>
-  </div>
-  
-  <div class="freeform-item">
-    <a href="images/freeform-jacket.png" data-lightbox="freeform" data-title="Varsity Jacket">
-      <img src="images/freeform-jacket.png" alt="Varsity Jacket">
-    </a>
-    <p>Varsity Jacket</p>
-  </div>
-  
-  <div class="freeform-item">
-    <a href="images/freeform-denim-jacket.png" data-lightbox="freeform" data-title="Hooded Denim Jacket">
-      <img src="images/freeform-denim-jacket.png" alt="Hooded Denim Jacket">
-    </a>
-    <p>Hooded Denim Jacket</p>
-  </div>
-</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:30px; max-width:1300px; margin:0 auto 80px;">
+            <div>
+                <img src="images/freeform-short.png" alt="Freeform Shorts" 
+                     style="width:100%; border-radius:16px; box-shadow:0 20px 40px rgba(255,30,86,0.25); transition:0.4s;"
+                     onmouseover="this.style.transform='scale(1.03)'"
+                     onmouseout="this.style.transform='scale(1)'">
+                <p style="margin-top:12px; font-size:1.1rem;">Signature Shorts</p>
+            </div>
+            <div>
+                <img src="images/freeform-denim-jacket.png" alt="Freeform Hooded Denim Jacket" 
+                     style="width:100%; border-radius:16px; box-shadow:0 20px 40px rgba(255,30,86,0.25); transition:0.4s;"
+                     onmouseover="this.style.transform='scale(1.03)'"
+                     onmouseout="this.style.transform='scale(1)'">
+                <p style="margin-top:12px; font-size:1.1rem;">Hooded Denim Jacket</p>
+            </div>
+            <div>
+                <img src="images/freeform-jacket.png" alt="Freeform Jacket" 
+                     style="width:100%; border-radius:16px; box-shadow:0 20px 40px rgba(255,30,86,0.25); transition:0.4s;"
+                     onmouseover="this.style.transform='scale(1.03)'"
+                     onmouseout="this.style.transform='scale(1)'">
+                <p style="margin-top:12px; font-size:1.1rem;">Varsity Jacket</p>
+            </div>
+            <div>
+                <img src="images/freeform-merch.png" alt="Freeform Merch" 
+                     style="width:100%; border-radius:16px; box-shadow:0 20px 40px rgba(255,30,86,0.25); transition:0.4s;"
+                     onmouseover="this.style.transform='scale(1.03)'"
+                     onmouseout="this.style.transform='scale(1)'">
+                <p style="margin-top:12px; font-size:1.1rem;">Merch Collection</p>
+            </div>
+        </div>
+
         <a href="https://instagram.com/freeform.clo" target="_blank" class="btn btn-primary" style="padding:18px 50px; font-size:1.3rem;">
             Shop FREEFORM
         </a>
@@ -905,14 +907,6 @@ window.addEventListener('scroll', function() {
   transform:scale(1.1);
   animation:none;
 }
-</style>
-<!-- ZOOMABLE LIGHTBOX FOR FREEFORM PHOTOS (NO NEW TAB) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-<style>
-  .lb-outerContainer { background: rgba(0,0,0,0.95); border: 2px solid #ff1e56; border-radius: 16px; box-shadow: 0 0 60px rgba(255,30,86,0.5); }
-  .lb-image { border-radius: 12px; }
-  .lb-close, .lb-nav { color: #ff1e56; }
 </style>
 </body>
 </html>
